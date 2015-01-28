@@ -2,6 +2,8 @@ var fs = require('fs'),
    readline = require('readline'),
    stream = require('stream');
 
+var fs2 = require('fs');
+
 var instream = fs.createReadStream('../../../stage/movies.list', {encoding: 'binary'});
 var outstream = new stream;
 outstream.readable = true;
@@ -13,10 +15,9 @@ var rl = readline.createInterface({
    terminal: false
 });
 
-var atTitle = false;
 var atData = false;
-var newRecord = {};
-var regExp = /\(([^)]+)\)/;
+// var newRecord = {};
+// var regExp = /\(([^)]+)\)/;
 
 rl.on('line', function(line) {
   if (atData) {
@@ -27,14 +28,17 @@ rl.on('line', function(line) {
         atData = false;
       } else {
         var parseArray = line.split('\t');
-        newRecord.title = parseArray[0];
-        newRecord.year = parseArray[parseArray.length-1];
-        console.log('newRecord: ', newRecord);
-        newRecord = {};
+        // newRecord.title = parseArray[0];
+        // newRecord.year = parseArray[parseArray.length-1];
+        // append to TSV file for bulk copy
+        fs2.appendFileSync('./tsvFiles/movies.tsv', "\n" + parseArray[0] +"\t" + parseArray[parseArray.length-1]);
+        // newRecord = {};
       }
     }
   // logic to skip non movie data at the head of the file
   } else if(line === "===========") {
     atData = true;
+    // create/overwrite TSV file for buik copy
+    fs2.writeFileSync('./tsvFiles/movies.tsv', "title" +"\t" + "year");
   }
 });

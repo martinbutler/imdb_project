@@ -8,4 +8,4 @@ dist
 /server/config/local.env.js
 .DS_Store
 /server/stage
-/server/api/utils/import/tempFiles
+/server/api/utils/import/tsvFiles
