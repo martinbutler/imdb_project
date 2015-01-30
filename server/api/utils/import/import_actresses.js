@@ -31,7 +31,7 @@ rl.on('line', function(line) {
     if (line.length > 0) {
       // check for end of data marker
       if (line.substring(0, 4) === '----') {
-        // atData = false;
+        atData = false;
         atTitle = false;
         // append last record to TSV file for bulk copy
         fs2.appendFileSync(outputFile, "\nactor: " + newRecord.actor + ", titles" + newRecord.titles);
@@ -54,24 +54,29 @@ rl.on('line', function(line) {
         var fullTitleData = parseArray[parseArray.length-1];
         var parMatches = fullTitleData.match(regExpParentheses);
         var i = 1, title, billing, role;
-        var parMatchLen = parMatches.length;
+        // address inconsistancy with data dump
+        if (parMatches) {
+          parMatchLen = parMatches.length;
+        } else {
+          fullTitleData = line.substring(line.indexOf(parseArray[parseArray.length-2]));
+          console.log(fullTitleData);
+        }
+        // parses the titles with TV or V tags
         while (i < parMatchLen){
           if (parMatches[i] === "(TV)" || parMatches[i] === "(V)"){
             title = fullTitleData.substring(0, fullTitleData.indexOf(parMatches[i]) + parMatches[i].length);
             i = parMatchLen;
-            console.log(title);
           }
           i++;
         }
-        // if(!title) {
-        //   curlyMatch = parseArray[parseArray.length-1].match(regExpEpisode);
+        if (!title) {
+          episodeMatch = fullTitleData.match(regExpEpisode);
+          if (episodeMatch > 1) {
+            console.log(episodeMatch);
+          }
 
-        //   if (curlyMatch) {
-        //     console.log(curlyMatch);
-        //     // title = parseArray[parseArray.length-1].substring(0, parseArray[parseArray.length-1].indexOf(curlyMatch) + curlyMatch.length);
-        //     // console.log(title);
-        //   }
-        // }
+        }
+
 
         newRecord.titles.push(title);
         // newRecord.titles.push(parseArray[parseArray.length-1]);
