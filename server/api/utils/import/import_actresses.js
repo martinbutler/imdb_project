@@ -19,10 +19,10 @@ var rl = readline.createInterface({
 var atTitle = false;
 var atData = false;
 var newRecord = {};
-var regExpParentheses = /\(([^)]+)\)/g;
-var regExpEpisode =     /\{([^)]+)\}/g;
-var regExpSquare =      /\[([^)]+)\]/g;
-var regExpBilling =     /\<([^)]+)\>/g;
+var regExpParentheses = /\((.*?)\)/g;
+var regExpEpisode =     /\{(.*?)\}/g;
+var regExpSquare =      /\[(.*?)\]/g;
+var regExpBilling =     /\<(.*?)\>/g;
 
 
 rl.on('line', function(line) {
@@ -56,10 +56,10 @@ rl.on('line', function(line) {
         var i = 1, title, billing, role;
         // address inconsistancy with data dump
         if (parMatches) {
-          parMatchLen = parMatches.length;
+          var parMatchLen = parMatches.length;
         } else {
           fullTitleData = line.substring(line.indexOf(parseArray[parseArray.length-2]));
-          console.log(fullTitleData);
+          parMatches = fullTitleData.match(regExpParentheses);
         }
         // parses the titles with TV or V tags
         while (i < parMatchLen){
@@ -69,14 +69,34 @@ rl.on('line', function(line) {
           }
           i++;
         }
+        // parse the titles with episode information in the record
         if (!title) {
-          episodeMatch = fullTitleData.match(regExpEpisode);
-          if (episodeMatch > 1) {
-            console.log(episodeMatch);
+          var episodeMatch = fullTitleData.match(regExpEpisode);
+
+          if (episodeMatch){
+            title = fullTitleData.substring(0, fullTitleData.indexOf(episodeMatch[0])+ episodeMatch[0].length);
           }
-
         }
-
+        // parse titles with no episode, TV or V tags
+        if (!title) {
+          if(!parMatches) {
+            console.log(line);
+          }
+          title = fullTitleData.substring(0, fullTitleData.indexOf(parMatches[0])+parMatches[0].length);
+        }
+        // parse billing
+        var billingMatch = fullTitleData.substring(title.length-1).match(regExpBilling);
+        if (billingMatch) {
+          billing = billingMatch[0];
+        }
+        // parse role
+        var roleMatch = fullTitleData.substring(title.length-1).match(regExpSquare);
+        if (roleMatch) {
+          if(roleMatch.length > 1) {
+            console.log(roleMatch);
+            console.log(line);
+          }
+        }
 
         newRecord.titles.push(title);
         // newRecord.titles.push(parseArray[parseArray.length-1]);
@@ -88,6 +108,6 @@ rl.on('line', function(line) {
   } else if (atTitle && line.substring(0, 4) === '----'){
     atData = true;
     // create/overwrite TSV file for buik copy
-    fs2.writeFileSync(outputFile, "title" +"\t" + "year");
+    // fs2.writeFileSync(outputFile, "title" +"\t" + "year");
   }
 });
