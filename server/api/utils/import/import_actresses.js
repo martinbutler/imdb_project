@@ -19,29 +19,30 @@ var rl = readline.createInterface({
 var atTitle = false;
 var atData = false;
 var newRecord = {};
-var regExp = /\(([^)]+)\)/g;
+var regExpParentheses = /\(([^)]+)\)/g;
+var regExpEpisode =     /\{([^)]+)\}/g;
+var regExpSquare =      /\[([^)]+)\]/g;
+var regExpBilling =     /\<([^)]+)\>/g;
+
 
 rl.on('line', function(line) {
   if (atData) {
     // skip blank lines
     if (line.length > 0) {
-      // check for end of file
+      // check for end of data marker
       if (line.substring(0, 4) === '----') {
         // atData = false;
         atTitle = false;
-        // (((((((((((((((((((()))))))))))))))))))
-        // append to TSV file for bulk copy
+        // append last record to TSV file for bulk copy
         fs2.appendFileSync(outputFile, "\nactor: " + newRecord.actor + ", titles" + newRecord.titles);
-        // (((((((((((((((((((()))))))))))))))))))
       } else {
         var parseArray = line.split('\t');
+        // check if line is includes actress name
         if (parseArray[0] !== '') {
-          // if (newRecord.actor) {
+          // check if previous record has been written
           if (newRecord.actor) {
-            // (((((((((((((((((((()))))))))))))))))))
-            // append to TSV file for bulk copy
             fs2.appendFileSync(outputFile, "\nactor: " + newRecord.actor + ", titles" + newRecord.titles);
-            // (((((((((((((((((((()))))))))))))))))))
+            // prep for new record
             newRecord = {};
             newRecord.actor = parseArray[0];
             newRecord.titles = [];
@@ -49,23 +50,31 @@ rl.on('line', function(line) {
             newRecord.actor = parseArray[0];
             newRecord.titles = [];
           }
-        } else {
-          // hand titles
-          // fs2.appendFileSync(outputFile, "\n" + parseArray);
         }
-        var matches = parseArray[parseArray.length-1].match(regExp);
-        var i = 1;
-        var matchLen = matches.length;
-        // console.log('1 parse', parseArray);
-        while (i < matchLen){
-          // console.log('2 matches[i]', matches[i]);
-          if (matches[i] === "(TV)" || matches[i] === "(V)"){
-            var titleTemp = parseArray[parseArray.length-1].substring(0, parseArray[parseArray.length-1].indexOf(matches[i]) + matches[i].length);
-            i = matchLen;
+        var fullTitleData = parseArray[parseArray.length-1];
+        var parMatches = fullTitleData.match(regExpParentheses);
+        var i = 1, title, billing, role;
+        var parMatchLen = parMatches.length;
+        while (i < parMatchLen){
+          if (parMatches[i] === "(TV)" || parMatches[i] === "(V)"){
+            title = fullTitleData.substring(0, fullTitleData.indexOf(parMatches[i]) + parMatches[i].length);
+            i = parMatchLen;
+            console.log(title);
           }
           i++;
         }
-        newRecord.titles.push(parseArray[parseArray.length-1]);
+        // if(!title) {
+        //   curlyMatch = parseArray[parseArray.length-1].match(regExpEpisode);
+
+        //   if (curlyMatch) {
+        //     console.log(curlyMatch);
+        //     // title = parseArray[parseArray.length-1].substring(0, parseArray[parseArray.length-1].indexOf(curlyMatch) + curlyMatch.length);
+        //     // console.log(title);
+        //   }
+        // }
+
+        newRecord.titles.push(title);
+        // newRecord.titles.push(parseArray[parseArray.length-1]);
       }
     }
   // logic to skip non movie data at the head of the file
