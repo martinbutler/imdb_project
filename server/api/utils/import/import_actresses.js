@@ -92,9 +92,11 @@ rl.on('line', function(line) {
         // parse role
         var roleMatch = fullTitleData.substring(title.length-1).match(regExpSquare);
         if (roleMatch) {
-          if(roleMatch.length > 1) {
-            console.log(roleMatch);
-            console.log(line);
+          if (!billing) {
+            console.log(fullTitleData.substring(title.length+2));
+          } else {
+            console.log(fullTitleData.substring(title.length+2, fullTitleData.indexOf(billing)).trim()
+              );
           }
         }
 
