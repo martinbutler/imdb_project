@@ -1,14 +1,13 @@
-# [IMDB Project](https://github.com/martinbutler/imdb_project)
+- # [IMDB Project](https://github.com/martinbutler/imdb_project)
 MASTERS PROJECT PROPOSAL
 SPRING 2015
 
 ## Interface for Querying and Data Mining for the IMDb Dataset
-
-Martin Butler
-Advisor: Dr. Stefan Robila
-Department of Computer Science
-Montclair State University
-Montclair, NJ 07043
+- by: Martin Butler
+- Advisor: Dr. Stefan Robila
+- Department of Computer Science
+- Montclair State University
+- Montclair, NJ 07043
 
 # Objective:
 
@@ -21,51 +20,51 @@ The IMDb is an online database of information related to films, television progr
 An internet search on the use of this dataset returns numerous references from academic sites and in a number of published papers.  Colleges and Universities have suggested the dataset as a research topic in areas of data mining [7][8].  Publications have shown various uses of the dataset including combining Collaborative Filtering and Content-based methods to improve recommendations [9] and building more robust search capabilities as compared to rudimentary search functionality by content providers such as Netflix [10].
 
 The dataset [11] includes over 5.5 GB of plain text data in 45 files:
-Actors, ~933 MB
-Actresses, ~550 MB
-AKA-Names, ~30 MB
-AKA-Titles, ~31 MB
-Alternative Versions, ~7 MB
-Biographies, ~500 MB
-Business, ~54 MB
-Certificates, ~26 MB
-Cinematographers, ~52 MB
-Color Info, ~68 MB
-Complete Cast, ~4 MB
-Complete Crew, ~3 MB
-Composers, ~ 44 MB
-Costume Designers, ~ 15 MB
-Countries, ~ 63 MB
-Crazy Credits, ~ 3 MB
-Directors, ~ 96MB
-Distributors, ~ 132 MB
-Editors, ~ 67 MB
-Genres, ~ 72 MB
-Keywords, ~ 252 MB
-Language, ~ 68 MB
-Laserdisc, ~ 5 MB
-Literature, ~ 22 MB
-Locations, ~ 63 MB
-Miscellaneous Companies, ~ 74 MB
-Miscellaneous, ~ 74 MB
-Movie Links, ~ 48 MB
-Movies, ~ 147 MB
-MPAA Ratings Reasons, ~ 3 MB
-Plot, ~ 311 MB
-Producers, ~ 350 MB
-Production Companies, ~ 120 MB
-Production Designers, ~ 18 MB
-Quotes, ~ 170 MB
-Ratings, ~ 40 MB
-Release Dates, ~ 240 MB
-Running Times, ~ 40 MB
-Sound Mix, ~ 25 MB
-Soundtracks, ~ 71 MB
-Special Effects Companies, ~ 4 MB
-Taglines, ~ 13 MB
-Technical, ~ 79 MB
-Trivia, ~ 97 MB
-Writes, ~ 200 MB
+- Actors, ~933 MB
+- Actresses, ~550 MB
+- AKA-Names, ~30 MB
+- AKA-Titles, ~31 MB
+- Alternative Versions, ~7 MB
+- Biographies, ~500 MB
+- Business, ~54 MB
+- Certificates, ~26 MB
+- Cinematographers, ~52 MB
+- Color Info, ~68 MB
+- Complete Cast, ~4 MB
+- Complete Crew, ~3 MB
+- Composers, ~ 44 MB
+- Costume Designers, ~ 15 MB
+- Countries, ~ 63 MB
+- Crazy Credits, ~ 3 MB
+- Directors, ~ 96MB
+- Distributors, ~ 132 MB
+- Editors, ~ 67 MB
+- Genres, ~ 72 MB
+- Keywords, ~ 252 MB
+- Language, ~ 68 MB
+- Laserdisc, ~ 5 MB
+- Literature, ~ 22 MB
+- Locations, ~ 63 MB
+- Miscellaneous Companies, ~ 74 MB
+- Miscellaneous, ~ 74 MB
+- Movie Links, ~ 48 MB
+- Movies, ~ 147 MB
+- MPAA Ratings Reasons, ~ 3 MB
+- Plot, ~ 311 MB
+- Producers, ~ 350 MB
+- Production Companies, ~ 120 MB
+- Production Designers, ~ 18 MB
+- Quotes, ~ 170 MB
+- Ratings, ~ 40 MB
+- Release Dates, ~ 240 MB
+- Running Times, ~ 40 MB
+- Sound Mix, ~ 25 MB
+- Soundtracks, ~ 71 MB
+- Special Effects Companies, ~ 4 MB
+- Taglines, ~ 13 MB
+- Technical, ~ 79 MB
+- Trivia, ~ 97 MB
+- Writes, ~ 200 MB
 
 # Proposed work:
 
@@ -89,18 +88,18 @@ The completed work is intended to be an open-source software development effort 
 
 # References:
 
-[1] AnuglarJS by Google, https://angularjs.org/
-[2] ExpressJS, http://expressjs.com/
-[3] Mozilla Developer Network, https://developer.mozilla.org/en-US/docs/Web/JavaScript
-[5] Internet Movie Database, http://en.wikipedia.org/wiki/Internet_Movie_Database
-[6] IMDb.com Alternative Interfaces, http://www.imdb.com/interfaces
-[7] Stanford University ,http://web.stanford.edu/class/cs341/data.html
-[8] University of Notre Dame, College of Engerineering http://www3.nd.edu/~rjohns15/cse40647.01/www/resources.php
-[9] Content-Boosted Collaborative Filtering for Improved Recommendations, http://www.aaai.org/Papers/AAAI/2002/AAAI02-029.pdf
-[10] A Conversational Movie Search System Based on Conditional Random Fields, https://groups.csail.mit.edu/sls/publications/2012/Liu-Interspeech12.pdf
-[11] FTP Mirror Site, IMDb dataset files, ftp.fu-berlin.de/pub/misc/movies/database/
-[12] IMDb.com, http://www.imdb.com/
-[13] OAuth, http://en.wikipedia.org/wiki/OAuth
-[14] GitHub.com, https://github.com/about
-[15] Forking, http://en.wikipedia.org/wiki/Fork_(software_development)
+- [1] AnuglarJS by Google, https://angularjs.org/
+- [2] ExpressJS, http://expressjs.com/
+- [3] Mozilla Developer Network, https://developer.mozilla.org/en-US/docs/Web/JavaScript
+- [5] Internet Movie Database, http://en.wikipedia.org/wiki/Internet_Movie_Database
+- [6] IMDb.com Alternative Interfaces, http://www.imdb.com/interfaces
+- [7] Stanford University ,http://web.stanford.edu/class/cs341/data.html
+- [8] University of Notre Dame, College of Engerineering http://www3.nd.edu/~rjohns15/cse40647.01/www/resources.php
+- [9] Content-Boosted Collaborative Filtering for Improved Recommendations, http://www.aaai.org/Papers/AAAI/2002/AAAI02-029.pdf
+- [10] A Conversational Movie Search System Based on Conditional Random Fields, https://groups.csail.mit.edu/sls/publications/2012/Liu-Interspeech12.pdf
+- [11] FTP Mirror Site, IMDb dataset files, ftp.fu-berlin.de/pub/misc/movies/database/
+- [12] IMDb.com, http://www.imdb.com/
+- [13] OAuth, http://en.wikipedia.org/wiki/OAuth
+- [14] GitHub.com, https://github.com/about
+- [15] Forking, http://en.wikipedia.org/wiki/Fork_(software_development)
 
