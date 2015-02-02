@@ -1,8 +1,8 @@
-# imdb_project
+# [IMDB Project](https://github.com/martinbutler/imdb_project)
 MASTERS PROJECT PROPOSAL
 SPRING 2015
 
-Interface for Querying and Data Mining for the IMDb Dataset
+## Interface for Querying and Data Mining for the IMDb Dataset
 
 Martin Butler
 Advisor: Dr. Stefan Robila
@@ -10,13 +10,11 @@ Department of Computer Science
 Montclair State University
 Montclair, NJ 07043
 
-
-
-Objective:
+# Objective:
 
 The goal of the project is develop a web-based software system providing a user interface to query data from IMDb (Internet Movie Database) dataset. The system will be built on a free and open-source solution stack.  The completion of the the data analysis will determine the full architect, but I currently expect to use the following subset of technologies; AngularJS [1], ExpressJs [2], Javascript [3], and NodeJs [4].
 
-Background:
+# Background:
 
 The IMDb is an online database of information related to films, television programs, and video games, taking in various information including, but not limited to, actors, production crew, fictional characters, biographies, plot summaries, and trivia [5].  The IMDb doesn’t currently provide an API (application programming interface) to allow for customized views and/or queries to their database, however they do provide alternative interfaces.  One of the provided alternatives is a subset of the IMDb in plain text data files for local access [6].
 
@@ -69,7 +67,7 @@ Technical, ~ 79 MB
 Trivia, ~ 97 MB
 Writes, ~ 200 MB
 
-Proposed work:
+# Proposed work:
 
 Initialing I will analyze the dataset to determine and document its schema.  Based on this work, I will determine which type of DB to utilize and implement; SQL or NoSQL DB. In addition, the schema will help provide the query opportunities available, which will determine the comprehensive query features to be implemented.
 
@@ -88,46 +86,8 @@ In addition, some light data mining will be explored. For example, I plan to inv
 
 The completed work is intended to be an open-source software development effort in that codebase will be made available on the GitHub website [14] for free and unrestricted use.  This will allow others a framework to work with the IMDb dataset and augment and/or update the code by forking [15] their own copy of the repository.
 
-Timeline:
 
-Task
-Description
-Proposed Completion
-Project Proposal Draft
-
-
-December 8, 2014
-Database Analysis
-Determine the schema and determine the type of DB to be used.
-January 23, 2015
-DB population
-Build DB and inject data set
-January 30, 2015
-Basic Framework
-Build basic framework that includes all components to the systems stack, including web server, middleware, and linked to populated DB
-February 6, 2015
-Simple Search
-UI to perform simple searches on many of the tables in DB (i.e. actors or movies)
-February 20, 2015
-Advance Search
-Perform searches via multi option criteria across all related tables.
-March 20, 2015
-OAuth
-Provide user authentication options, including local logins, Google API, and Facebook API.
-April 03, 2015
-Query History
-Save and retrieve user’s query history
-April 17, 2015
-Complete Report
-Document the project
-April 24, 2015
-Project Presentation
-
-
-April 30, 2015 / TBD
-
-
-References:
+# References:
 
 [1] AnuglarJS by Google, https://angularjs.org/
 [2] ExpressJS, http://expressjs.com/
