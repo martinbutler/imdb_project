@@ -1,4 +1,4 @@
-- # [IMDB Project](https://github.com/martinbutler/imdb_project)
+# [IMDB Project](https://github.com/martinbutler/imdb_project)
 MASTERS PROJECT PROPOSAL
 SPRING 2015
 
