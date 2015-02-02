@@ -22,7 +22,7 @@ var newRecord = {};
 var regExpParentheses = /\((.*?)\)/g;
 var regExpEpisode =     /\{(.*?)\}/g;
 var regExpSquare =      /\[(.*?)\]/g;
-var regExpBilling =     /\<(.*?)\>/g;
+var regExpBilling =     /<(.*?)>/g;
 
 
 rl.on('line', function(line) {
@@ -54,7 +54,14 @@ rl.on('line', function(line) {
         var fullTitleData = parseArray[parseArray.length-1];
         var parMatches = fullTitleData.match(regExpParentheses);
         var i = 1, title, billing, role;
-        // address inconsistancy with data dump
+        var fullCredit = {};
+        // address inconsistency with data dump
+        //   most records will have the no actor name data
+        //    in the last field in the tab delimitation
+        //    however there were a few records that contained
+        //    additional tab.  This will will verify and
+        //    concatenate the last two fields to correct
+        //    data.
         if (parMatches) {
           var parMatchLen = parMatches.length;
         } else {
@@ -64,7 +71,7 @@ rl.on('line', function(line) {
         // parses the titles with TV or V tags
         while (i < parMatchLen){
           if (parMatches[i] === "(TV)" || parMatches[i] === "(V)"){
-            title = fullTitleData.substring(0, fullTitleData.indexOf(parMatches[i]) + parMatches[i].length);
+            title = fullTitleData.substring(0, fullTitleData.indexOf(parMatches[i]) + parMatches[i].length).replace(/"/g, '\\"');
             i = parMatchLen;
           }
           i++;
@@ -74,34 +81,33 @@ rl.on('line', function(line) {
           var episodeMatch = fullTitleData.match(regExpEpisode);
 
           if (episodeMatch){
-            title = fullTitleData.substring(0, fullTitleData.indexOf(episodeMatch[0])+ episodeMatch[0].length);
+            title = fullTitleData.substring(0, fullTitleData.indexOf(episodeMatch[0])+ episodeMatch[0].length).replace(/"/g, '\\"');
           }
         }
         // parse titles with no episode, TV or V tags
         if (!title) {
-          if(!parMatches) {
-            console.log(line);
-          }
-          title = fullTitleData.substring(0, fullTitleData.indexOf(parMatches[0])+parMatches[0].length);
+          title = fullTitleData.substring(0, fullTitleData.indexOf(parMatches[0])+parMatches[0].length).replace(/"/g, '\\"');
         }
         // parse billing
         var billingMatch = fullTitleData.substring(title.length-1).match(regExpBilling);
         if (billingMatch) {
-          billing = billingMatch[0];
+          billing = billingMatch[0].replace(/"/g, '\\"');
+          console.log(billing);
         }
         // parse role
         var roleMatch = fullTitleData.substring(title.length-1).match(regExpSquare);
         if (roleMatch) {
           if (!billing) {
-            console.log(fullTitleData.substring(title.length+2));
+            role = fullTitleData.substring(title.length).trim().replace(/"/g, '\\"');
+            // console.log(fullTitleData.substring(title.length+2));
           } else {
-            console.log(fullTitleData.substring(title.length+2, fullTitleData.indexOf(billing)).trim()
-              );
+            role = fullTitleData.substring(title.length, fullTitleData.indexOf(billing)).trim().replace(/"/g, '\\"');
+            // console.log(fullTitleData.substring(title.length+2, fullTitleData.indexOf(billing)).trim()
+              // );
           }
         }
-
-        newRecord.titles.push(title);
-        // newRecord.titles.push(parseArray[parseArray.length-1]);
+        newRecord.titles.push({"title": title, "role": role, "billing": billing});
+        // console.log(newRecord);
       }
     }
   // logic to skip non movie data at the head of the file
