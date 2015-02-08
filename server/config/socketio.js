@@ -18,6 +18,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/actor/actor.socket').register(socket);
   require('../api/actress/actress.socket').register(socket);
   require('../api/mpaaRatingsReason/mpaaRatingsReason.socket').register(socket);
   require('../api/movie/movie.socket').register(socket);
