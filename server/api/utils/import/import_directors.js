@@ -23,6 +23,7 @@ var regExpParentheses = /\((.*?)\)/g;
 var regExpEpisode =     /\{(.*?)\}/g;
 var regExpSquare =      /\[(.*?)\]/g;
 var regExpSuspended =      /\{\{SUSPENDED\}\}/g;
+var regExpYear = /\((.*?)\)/g;
 
 
 rl.on('line', function(line) {
@@ -37,7 +38,7 @@ rl.on('line', function(line) {
         fs.appendFileSync(outputFile, JSON.stringify(newRecord) + "\n");
       } else {
         var parseArray = line.split('\t');
-        // check if line is includes actress name
+        // check if line is includes director's name
         if (parseArray[0] !== '') {
           // check if previous record has been written
           if (newRecord._id) {
@@ -54,8 +55,7 @@ rl.on('line', function(line) {
         var fullTitleData = parseArray[parseArray.length-1];
         var title, addInfo;
         // parse the titles marked as suspended
-        var suspendMatches = fullTitleData.match(regExpSuspended);
-        if(suspendMatches) {
+        if(suspendMatches = fullTitleData.match(regExpSuspended)) {
           title = fullTitleData.substring(0, fullTitleData.indexOf(suspendMatches[0]) + suspendMatches[0].length).replace(/"/g, '\\"');
         }
         // parses the titles with TV or V tags
@@ -73,42 +73,32 @@ rl.on('line', function(line) {
         }
         // parse the titles with episode information in the record
         if (!title) {
-          var episodeMatch = fullTitleData.match(regExpEpisode);
-
-          if (episodeMatch){
+          if (episodeMatch = fullTitleData.match(regExpEpisode)){
             title = fullTitleData.substring(0, fullTitleData.indexOf(episodeMatch[0])+ episodeMatch[0].length).replace(/"/g, '\\"');
           }
         }
-        // parse titles with no episode, TV or V tags
-        // Based on data dump, parMatches will be defined if
-        // title is still not.
+        // Parse title addressing multi-parentheses find
+        // based on expeted year formats in data
+        // Based on data dump, parMatches assignment will have
+        // executed if title has not be defined
         if (!title) {
-          if(parMatchLen > 1){
-            console.log(parMatches);
+          for (var i = 0; i < parMatchLen; i++) {
+            if (parMatches[i] === '(????)' || parMatches[i].substring(0, 6) === '(????/' || parseInt(parMatches[i].substring(1)) >= 1870) {
+              title = fullTitleData.substring(0, fullTitleData.indexOf(parMatches[i])  + parMatches[i].length).replace(/"/g, '\\"');
+            }
           }
-          title = fullTitleData.substring(0, fullTitleData.indexOf(parMatches[0])+parMatches[0].length).replace(/"/g, '\\"');
-          if(parMatchLen > 1){
-          console.log(title);
-          console.log('**********');
         }
-          if(title=='La última parada (Lo peor de todo)') {
-            console.log(title);
-
-          }
+        // parse titles with no previous matching criteria, including
+        // episodes, TV tag, V tag, VG tag, and year formats
+        // if no other match for title is found, use the full title data
+        if (!title) {
+          title = fullTitleData.replace(/"/g, '\\"');
         }
         // parse addInfo, if it exists
-        var addInfoMatch = fullTitleData.substring(title.length).trim();
-        if (addInfoMatch) {
-          if(parMatchLen) {
-            // console.log('full', fullTitleData);
-            // console.log('title', title);
-            // console.log('*************');
-            // console.log( addInfoMatch);
-            // console.log('_____________');
-          }
+        if (addInfoMatch = fullTitleData.substring(title.length).trim()) {
             addInfo = fullTitleData.substring(title.length).trim().replace(/"/g, '\\"');
         }
-        // save title and associated data in actress' title array
+        // save title and associated data in director's title array
         newRecord.titles.push({"title": title, "addInfo": addInfo});
       }
     }
