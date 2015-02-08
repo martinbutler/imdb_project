@@ -2,8 +2,8 @@ var fs = require('fs'),
    readline = require('readline'),
    stream = require('stream');
 
-var fs2 = require('fs');
-var outputFile = './tsvFiles/actresses.tsv'
+
+var outputFile = './importFiles/actresses.json';
 
 var instream = fs.createReadStream('../../../stage/actresses.list', {encoding: 'binary'});
 var outstream = new stream;
@@ -33,21 +33,21 @@ rl.on('line', function(line) {
       if (line.substring(0, 4) === '----') {
         atData = false;
         atTitle = false;
-        // append last record to TSV file for bulk copy
-        fs2.appendFileSync(outputFile, "\nactor: " + newRecord.actor + ", titles" + newRecord.titles);
+        // append last record to JSON file for bulk copy
+        fs.appendFileSync(outputFile, JSON.stringify(newRecord) + "\n");
       } else {
         var parseArray = line.split('\t');
         // check if line is includes actress name
         if (parseArray[0] !== '') {
           // check if previous record has been written
-          if (newRecord.actor) {
-            fs2.appendFileSync(outputFile, "\nactor: " + newRecord.actor + ", titles" + newRecord.titles);
+          if (newRecord._id) {
+            fs.appendFileSync(outputFile, JSON.stringify(newRecord) + "\n");
             // prep for new record
             newRecord = {};
-            newRecord.actor = parseArray[0];
+            newRecord._id = parseArray[0];
             newRecord.titles = [];
           } else {
-            newRecord.actor = parseArray[0];
+            newRecord._id = parseArray[0];
             newRecord.titles = [];
           }
         }
@@ -92,22 +92,18 @@ rl.on('line', function(line) {
         var billingMatch = fullTitleData.substring(title.length-1).match(regExpBilling);
         if (billingMatch) {
           billing = billingMatch[0].replace(/"/g, '\\"');
-          console.log(billing);
         }
         // parse role
         var roleMatch = fullTitleData.substring(title.length-1).match(regExpSquare);
         if (roleMatch) {
           if (!billing) {
             role = fullTitleData.substring(title.length).trim().replace(/"/g, '\\"');
-            // console.log(fullTitleData.substring(title.length+2));
           } else {
             role = fullTitleData.substring(title.length, fullTitleData.indexOf(billing)).trim().replace(/"/g, '\\"');
-            // console.log(fullTitleData.substring(title.length+2, fullTitleData.indexOf(billing)).trim()
-              // );
           }
         }
+        // save title and associated data in actress' title array
         newRecord.titles.push({"title": title, "role": role, "billing": billing});
-        // console.log(newRecord);
       }
     }
   // logic to skip non movie data at the head of the file
@@ -115,7 +111,15 @@ rl.on('line', function(line) {
     atTitle = true;
   } else if (atTitle && line.substring(0, 4) === '----'){
     atData = true;
-    // create/overwrite TSV file for buik copy
-    // fs2.writeFileSync(outputFile, "title" +"\t" + "year");
+    // delete output file if exists
+    fs.unlink(outputFile, function(err) {
+      if(err) {
+        // file doesn't exist
+        // continue processing
+      }
+    });
+
   }
 });
+
+// mongoimport --db imdbproject-dev --collection actresses --file actresses.json

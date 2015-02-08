@@ -9,3 +9,4 @@ dist
 .DS_Store
 /server/stage
 /server/api/utils/import/tsvFiles
+/server/api/utils/import/importFiles
