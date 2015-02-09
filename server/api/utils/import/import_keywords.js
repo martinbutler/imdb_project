@@ -23,7 +23,10 @@ rl.on('line', function(line) {
   if (atData) {
     // skip blank lines
     if (line.length > 0) {
-      // each line of data contains one movie
+      // each line of data contains one movie one keyword
+      // save in records as one moive to one keyword.
+      // schema change and/or indexing to be determined later
+      // based on applicatin/util usage.
       var newRecord = {};
       var parseArray = line.split('\t');
       newRecord.title = parseArray[0].trim().replace(/"/g, '\\"');
