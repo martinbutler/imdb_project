@@ -76,7 +76,7 @@ rl.on('line', function(line) {
         // parses the titles with TV or V tags
         if (!title) {
           while (i < parMatchLen){
-            if (parMatches[i] === "(TV)" || parMatches[i] === "(V)"){
+            if (parMatches[i] === "(TV)" || parMatches[i] === "(V)" || parMatches[i] === "(VG)"){
               title = fullTitleData.substring(0, fullTitleData.indexOf(parMatches[i]) + parMatches[i].length).replace(/"/g, '\\"');
               i = parMatchLen;
             }
