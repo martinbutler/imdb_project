@@ -18,6 +18,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/producer/producer.socket').register(socket);
   require('../api/rating/rating.socket').register(socket);
   require('../api/director/director.socket').register(socket);
   require('../api/actor/actor.socket').register(socket);
