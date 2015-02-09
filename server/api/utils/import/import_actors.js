@@ -23,6 +23,7 @@ var regExpParentheses = /\((.*?)\)/g;
 var regExpEpisode =     /\{(.*?)\}/g;
 var regExpSquare =      /\[(.*?)\]/g;
 var regExpBilling =     /<(.*?)>/g;
+var regExpSuspended =   /\{\{SUSPENDED\}\}/g;
 
 
 rl.on('line', function(line) {
@@ -68,13 +69,19 @@ rl.on('line', function(line) {
           fullTitleData = line.substring(line.indexOf(parseArray[parseArray.length-2]));
           parMatches = fullTitleData.match(regExpParentheses);
         }
+        // parse the titles marked as suspended
+        if(suspendMatches = fullTitleData.match(regExpSuspended)) {
+          title = fullTitleData.substring(0, fullTitleData.indexOf(suspendMatches[0]) + suspendMatches[0].length).replace(/"/g, '\\"');
+        }
         // parses the titles with TV or V tags
-        while (i < parMatchLen){
-          if (parMatches[i] === "(TV)" || parMatches[i] === "(V)"){
-            title = fullTitleData.substring(0, fullTitleData.indexOf(parMatches[i]) + parMatches[i].length).replace(/"/g, '\\"');
-            i = parMatchLen;
+        if (!title) {
+          while (i < parMatchLen){
+            if (parMatches[i] === "(TV)" || parMatches[i] === "(V)"){
+              title = fullTitleData.substring(0, fullTitleData.indexOf(parMatches[i]) + parMatches[i].length).replace(/"/g, '\\"');
+              i = parMatchLen;
+            }
+            i++;
           }
-          i++;
         }
         // parse the titles with episode information in the record
         if (!title) {
