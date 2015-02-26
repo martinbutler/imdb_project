@@ -29,7 +29,7 @@ rl.on('line', function(line) {
       // based on applicatin/util usage.
       var newRecord = {};
       var parseArray = line.split('\t');
-      newRecord._id = parseArray[0].trim().replace(/"/g, '\\"');
+      newRecord.title = parseArray[0].trim().replace(/"/g, '\\"');
       newRecord.keyword = parseArray[parseArray.length-1].trim().replace(/"/g, '\\"');
       fs.appendFileSync(outputFile, JSON.stringify(newRecord) + "\n");
     }
