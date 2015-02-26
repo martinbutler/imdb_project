@@ -38,7 +38,7 @@ rl.on('line', function(line) {
         newRecord.votes = parseInt(lineSplit);
         var rankAndTitle = lineSplit.substring(lineSplit.indexOf(newRecord.votes)+ newRecord.votes.toString().length +3);
         newRecord.rank = rankAndTitle.substring(0, rankAndTitle.indexOf(' ')).trim();
-        newRecord.title = rankAndTitle.substring(rankAndTitle.indexOf(' ')).trim().replace(/"/g, '\\"');
+        newRecord._id = rankAndTitle.substring(rankAndTitle.indexOf(' ')).trim().replace(/"/g, '\\"');
         fs.appendFileSync(outputFile, JSON.stringify(newRecord) + "\n");
       }
     }
