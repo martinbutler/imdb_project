@@ -3,7 +3,7 @@ var fs = require('fs'),
    stream = require('stream');
 
 var fs2 = require('fs');
-var outputFile = './tsvFiles/movies.tsv'
+var outputFile = './importFiles/movies.json'
 
 var instream = fs.createReadStream('../../../stage/movies.list', {encoding: 'binary'});
 var outstream = new stream;
@@ -26,18 +26,22 @@ rl.on('line', function(line) {
       if (line.substring(0, 4) === '----') {
         atData = false;
       } else {
+        var newRecord = {}
         var parseArray = line.split('\t');
-        // newRecord.title = parseArray[0];
-        // newRecord.year = parseArray[parseArray.length-1];
-        // append to TSV file for bulk copy
-        fs2.appendFileSync(outputFile, "\n" + parseArray[0] +"\t" + parseArray[parseArray.length-1]);
-        // newRecord = {};
+        newRecord._id = parseArray[0].trim().replace(/"/g, '\\"');
+        newRecord.year = parseArray[parseArray.length-1].trim().replace(/"/g, '\\"');
+        fs.appendFileSync(outputFile, JSON.stringify(newRecord) + "\n");
       }
     }
   // logic to skip non movie data at the head of the file
   } else if(line === "===========") {
     atData = true;
-    // create/overwrite TSV file for buik copy
-    fs2.writeFileSync(outputFile, "title" +"\t" + "year");
+    // delete output file if exists
+    fs.unlink(outputFile, function(err) {
+      if(err) {
+        // file doesn't exist
+        // continue processing
+      }
+    });
   }
 });
