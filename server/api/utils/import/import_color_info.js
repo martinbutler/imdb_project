@@ -33,10 +33,6 @@ rl.on('line', function(line) {
         if (newRecord.color !== "Color" && newRecord.color !== 'Black and White') {
           newRecord.process = newRecord.color;
           newRecord.color = parseArray[parseArray.length-2].trim().replace(/"/g, '\\"');
-          // console.log(newRecord.color);
-          // if (parseArray[parseArray.length-2].trim().replace(/"/g, '\\"') !== "Color" && parseArray[parseArray.length-2].trim().replace(/"/g, '\\"') !== "Black and White" ){
-          //   console.log(line);
-          // }
         }
         fs.appendFileSync(outputFile, JSON.stringify(newRecord) + "\n");
       }
