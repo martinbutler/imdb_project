@@ -18,6 +18,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/runningTime/runningTime.socket').register(socket);
   require('../api/technical/technical.socket').register(socket);
   require('../api/language/language.socket').register(socket);
   require('../api/color/color.socket').register(socket);
