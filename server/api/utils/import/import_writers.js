@@ -28,8 +28,6 @@ rl.on('line', function(line) {
       if (line.substring(0, 4) === '----') {
         atData = false;
         atTitle = false;
-        // append last record to JSON file for bulk copy
-        // fs.appendFileSync(outputFile, JSON.stringify(newRecord) + "\n");
       } else {
         var parseArray = line.split('\t');
         // check if line is includes writers name
