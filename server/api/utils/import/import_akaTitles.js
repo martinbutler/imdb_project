@@ -19,12 +19,6 @@ var rl = readline.createInterface({
 var atTitle = false;
 var atData = false;
 var newRecord = {};
-var regExpParentheses = /\((.*?)\)/g;
-var regExpEpisode =     /\{(.*?)\}/g;
-var regExpSquare =      /\[(.*?)\]/g;
-var regExpBilling =     /<(.*?)>/g;
-var regExpSuspended =   /\{\{SUSPENDED\}\}/g;
-
 
 rl.on('line', function(line) {
   if (atData) {
@@ -36,7 +30,7 @@ rl.on('line', function(line) {
         atTitle = false;
       } else {
         var parseArray = line.split('\t');
-        // check if line is includes aka title name
+        // check if line is includes the title name
         if (parseArray[0].substring(0, 3) !== '   ') {
           newRecord.title = parseArray[0].trim().replace(/"/g, '\\"');
         } else {
