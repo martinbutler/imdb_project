@@ -9,6 +9,7 @@ var errors = require('./components/errors');
 module.exports = function(app) {
 
   // Insert routes below
+  app.use('/api/alternateVersions', require('./api/alternateVersion'));
   app.use('/api/akaNames', require('./api/akaName'));
   app.use('/api/akaTitles', require('./api/akaTitle'));
   app.use('/api/writers', require('./api/writer'));
