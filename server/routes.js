@@ -9,6 +9,7 @@ var errors = require('./components/errors');
 module.exports = function(app) {
 
   // Insert routes below
+  app.use('/api/costumeDesigners', require('./api/costumeDesigner'));
   app.use('/api/composers', require('./api/composer'));
   app.use('/api/completeCrew', require('./api/completeCrew'));
   app.use('/api/completeCast', require('./api/completeCast'));
