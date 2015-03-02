@@ -18,6 +18,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/completeCrew/completeCrew.socket').register(socket);
   require('../api/completeCast/completeCast.socket').register(socket);
   require('../api/cinematographer/cinematographer.socket').register(socket);
   require('../api/certificate/certificate.socket').register(socket);
