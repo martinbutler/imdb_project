@@ -9,6 +9,7 @@ var errors = require('./components/errors');
 module.exports = function(app) {
 
   // Insert routes below
+  app.use('/api/germanAkaTitles', require('./api/germanAkaTitle'));
   app.use('/api/goofs', require('./api/goof'));
   app.use('/api/editors', require('./api/editor'));
   app.use('/api/distributors', require('./api/distributor'));
