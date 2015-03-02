@@ -18,6 +18,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/certificate/certificate.socket').register(socket);
   require('../api/alternateVersion/alternateVersion.socket').register(socket);
   require('../api/akaName/akaName.socket').register(socket);
   require('../api/akaTitle/akaTitle.socket').register(socket);
