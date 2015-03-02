@@ -18,6 +18,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/cinematographer/cinematographer.socket').register(socket);
   require('../api/certificate/certificate.socket').register(socket);
   require('../api/alternateVersion/alternateVersion.socket').register(socket);
   require('../api/akaName/akaName.socket').register(socket);
