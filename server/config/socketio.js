@@ -18,6 +18,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/editor/editor.socket').register(socket);
   require('../api/distributor/distributor.socket').register(socket);
   require('../api/crazyCredit/crazyCredit.socket').register(socket);
   require('../api/costumeDesigner/costumeDesigner.socket').register(socket);
