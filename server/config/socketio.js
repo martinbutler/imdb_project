@@ -19,6 +19,9 @@ function onConnect(socket) {
 
   // Insert sockets below
   require('../api/tagline/tagline.socket').register(socket);
+  require('../api/italianAkaTitle/italianAkaTitle.socket').register(socket);
+  require('../api/isoAkaTitle/isoAkaTitle.socket').register(socket);
+  require('../api/germanAkaTitle/germanAkaTitle.socket').register(socket);
   require('../api/goof/goof.socket').register(socket);
   require('../api/editor/editor.socket').register(socket);
   require('../api/distributor/distributor.socket').register(socket);

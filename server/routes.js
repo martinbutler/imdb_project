@@ -10,6 +10,9 @@ module.exports = function(app) {
 
   // Insert routes below
   app.use('/api/taglines', require('./api/tagline'));
+  app.use('/api/italianAkaTitles', require('./api/italianAkaTitle'));
+  app.use('/api/isoAkaTitles', require('./api/isoAkaTitle'));
+  app.use('/api/germanAkaTitles', require('./api/germanAkaTitle'));
   app.use('/api/goofs', require('./api/goof'));
   app.use('/api/editors', require('./api/editor'));
   app.use('/api/distributors', require('./api/distributor'));
