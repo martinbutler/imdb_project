@@ -18,6 +18,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/trivia/trivia.socket').register(socket);
   require('../api/tagline/tagline.socket').register(socket);
   require('../api/italianAkaTitle/italianAkaTitle.socket').register(socket);
   require('../api/isoAkaTitle/isoAkaTitle.socket').register(socket);
