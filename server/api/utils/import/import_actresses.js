@@ -32,23 +32,11 @@ rl.on('line', function(line) {
       if (line.substring(0, 4) === '----') {
         atData = false;
         atTitle = false;
-        // append last record to JSON file for bulk copy
-        // fs.appendFileSync(outputFile, JSON.stringify(newRecord) + "\n");
       } else {
         var parseArray = line.split('\t');
         // check if line is includes actress name
         if (parseArray[0] !== '') {
-          // check if previous record has been written
-          // if (newRecord._id) {
-            // fs.appendFileSync(outputFile, JSON.stringify(newRecord) + "\n");
-            // prep for new record
-            // newRecord = {};
-            // newRecord._id = parseArray[0];
-            // newRecord.titles = [];
-          // } else {
-            newRecord.name = parseArray[0];
-            // newRecord.titles = [];
-          // }
+          newRecord.name = parseArray[0];
         }
         var fullTitleData = parseArray[parseArray.length-1];
         var parMatches = fullTitleData.match(regExpParentheses);
