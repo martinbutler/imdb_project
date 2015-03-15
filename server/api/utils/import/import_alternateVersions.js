@@ -36,7 +36,7 @@ rl.on('line', function(line) {
       } else {
         // check for title identifier in line
         if(line.substring(0, 2) === "# ") {
-          if (newRecord._id) {
+          if (newRecord.title) {
             altItems.push(altItem.trim().replace(/"/g, '\\"'));
             newRecord.alternates = altItems;
             fs.appendFileSync(outputFile, JSON.stringify(newRecord) + "\n");
@@ -44,7 +44,7 @@ rl.on('line', function(line) {
           newRecord = {};
           altItems = [];
           altItem = '';
-          newRecord._id = line.substring(2).trim().replace(/"/g, '\\"');
+          newRecord.title = line.substring(2).trim().replace(/"/g, '\\"');
         // check for alternate start identifier in line
         } else if (line.substring(0, 2) === "- ") {
           if(altItem) {
@@ -52,7 +52,7 @@ rl.on('line', function(line) {
           }
           altItem = line.substring(2);
         } else {
-          altItem += line.substring(1);
+          altItem += "\n" + line.substring(1);
         }
       }
     }
@@ -71,4 +71,4 @@ rl.on('line', function(line) {
   }
 })
 
-// mongoimport --db imdbproject-dev --collection alternateVersions --file alternateVersions.json
+// mongoimport --db imdbproject-dev --collection alternateversions --file alternateVersions.json

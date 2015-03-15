@@ -4,9 +4,8 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var AlternateVersionSchema = new Schema({
-  name: String,
-  info: String,
-  active: Boolean
+  title: String,
+  alternates: []
 });
 
 module.exports = mongoose.model('AlternateVersion', AlternateVersionSchema);
