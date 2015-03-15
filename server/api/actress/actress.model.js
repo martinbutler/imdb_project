@@ -5,8 +5,9 @@ var mongoose = require('mongoose'),
 
 var ActressSchema = new Schema({
   name: String,
-  info: String,
-  active: Boolean
+  title: String,
+  role: String,
+  billing: String
 });
 
 module.exports = mongoose.model('Actress', ActressSchema);
