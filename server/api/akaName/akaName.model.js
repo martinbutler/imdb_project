@@ -5,8 +5,7 @@ var mongoose = require('mongoose'),
 
 var AkaNameSchema = new Schema({
   name: String,
-  info: String,
-  active: Boolean
+  aka: String
 });
 
 module.exports = mongoose.model('AkaName', AkaNameSchema);

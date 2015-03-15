@@ -2,7 +2,6 @@ var fs = require('fs'),
    readline = require('readline'),
    stream = require('stream');
 
-
 var outputFile = './importFiles/akaNames.json';
 
 var instream = fs.createReadStream('../../../stage/aka-names.list', {encoding: 'binary'});
@@ -31,7 +30,7 @@ rl.on('line', function(line) {
       } else {
         // check if line is includes actor/actress name
         if (line.substring(0, 3) !== '   ') {
-          newRecord.title = line.trim().replace(/"/g, '\\"');
+          newRecord.name = line.trim().replace(/"/g, '\\"');
         } else {
           newRecord.aka = line.substring(7, line.length - 1).trim().replace(/"/g, '\\"');
           fs.appendFileSync(outputFile, JSON.stringify(newRecord) + "\n");
