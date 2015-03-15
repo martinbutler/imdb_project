@@ -4,9 +4,16 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var BusinessSchema = new Schema({
-  name: String,
-  info: String,
-  active: Boolean
+  title: String,
+  PD: [],
+  CP: [],
+  SD: [],
+  OW: [],
+  BT: [],
+  AD: [],
+  GR: [],
+  RT: [],
+  WG: []
 });
 
 module.exports = mongoose.model('Business', BusinessSchema);
