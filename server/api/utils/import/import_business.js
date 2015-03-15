@@ -39,11 +39,11 @@ rl.on('line', function(line) {
         
         // check for movie identifier in line
         if(line.substring(0, 3) === "MV:") {
-          if (newRecord._id) {
+          if (newRecord.title) {
             fs.appendFileSync(outputFile, JSON.stringify(newRecord) + "\n");
           }
           newRecord = {};
-          newRecord._id = line.substring(3).trim().replace(/"/g, '\\"');
+          newRecord.title = line.substring(3).trim().replace(/"/g, '\\"');
         // append non movie fields to record
         } else {
           var key = line.substring(0, 2);
