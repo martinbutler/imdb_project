@@ -50,4 +50,4 @@ rl.on('line', function(line) {
   }
 });
 
-// mongoimport --db imdbproject-dev --collection colorInfo --file colorInfo.json
+// mongoimport --db imdbproject-dev --collection colorinfo --file colorInfo.json
