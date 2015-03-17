@@ -30,7 +30,7 @@ rl.on('line', function(line) {
         atTitle = false;
       } else {
         var parseArray = line.split('\t');
-        newRecord._id = parseArray[0].trim().replace(/"/g, '\\"');
+        newRecord.title = parseArray[0].trim().replace(/"/g, '\\"');
         newRecord.complete =  parseArray[parseArray.length-1].trim().replace(/"/g, '\\"');
         fs.appendFileSync(outputFile, JSON.stringify(newRecord) + "\n");
       }
@@ -51,4 +51,4 @@ rl.on('line', function(line) {
   }
 });
 
-// mongoimport --db imdbproject-dev --collection completeCast --file completeCast.json
+// mongoimport --db imdbproject-dev --collection completecast --file completeCast.json
