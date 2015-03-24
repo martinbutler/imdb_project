@@ -5,8 +5,8 @@ var mongoose = require('mongoose'),
 
 var EditorSchema = new Schema({
   name: String,
-  info: String,
-  active: Boolean
+  title: String,
+  attribute: String
 });
 
 module.exports = mongoose.model('Editor', EditorSchema);
