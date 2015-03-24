@@ -4,9 +4,8 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var CrazyCreditSchema = new Schema({
-  name: String,
-  info: String,
-  active: Boolean
+  title: String,
+  credit: []
 });
 
 module.exports = mongoose.model('CrazyCredit', CrazyCreditSchema);
