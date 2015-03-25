@@ -4,9 +4,8 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var KeywordSchema = new Schema({
-  name: String,
-  info: String,
-  active: Boolean
+  title: String,
+  keyword: String
 });
 
 module.exports = mongoose.model('Keyword', KeywordSchema);
