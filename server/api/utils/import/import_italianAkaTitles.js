@@ -58,4 +58,4 @@ rl.on('line', function(line) {
   }
 });
 
-// mongoimport --db imdbproject-dev --collection italianAkaTitles --file italianAkaTitles.json
+// mongoimport --db imdbproject-dev --collection italianakatitles --file italianAkaTitles.json
