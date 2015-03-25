@@ -36,7 +36,7 @@ rl.on('line', function(line) {
       } else {
         // check for title identifier in line
         if(line.substring(0, 2) === "# ") {
-          if (newRecord._id) {
+          if (newRecord.title) {
             crazyCredits.push(crazyCredit.trim().replace(/"/g, '\\"'));
             newRecord.credit = crazyCredits;
             fs.appendFileSync(outputFile, JSON.stringify(newRecord) + "\n");
@@ -44,7 +44,7 @@ rl.on('line', function(line) {
           newRecord = {};
           crazyCredits = [];
           crazyCredit = '';
-          newRecord._id = line.substring(2).trim().replace(/"/g, '\\"');
+          newRecord.title = line.substring(2).trim().replace(/"/g, '\\"');
         // check for alternate start identifier in line
         } else if (line.substring(0, 2) === "- ") {
           if(crazyCredit) {
@@ -71,4 +71,4 @@ rl.on('line', function(line) {
   }
 })
 
-// mongoimport --db imdbproject-dev --collection crazyCredits --file crazyCredits.json
+// mongoimport --db imdbproject-dev --collection crazycredits --file crazyCredits.json
