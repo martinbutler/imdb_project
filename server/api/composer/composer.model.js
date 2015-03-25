@@ -5,8 +5,8 @@ var mongoose = require('mongoose'),
 
 var ComposerSchema = new Schema({
   name: String,
-  info: String,
-  active: Boolean
+  title: String,
+  attribute: String
 });
 
 module.exports = mongoose.model('Composer', ComposerSchema);
