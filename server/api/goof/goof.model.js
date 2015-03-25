@@ -4,9 +4,8 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var GoofSchema = new Schema({
-  name: String,
-  info: String,
-  active: Boolean
+  title: String,
+  goofs: []
 });
 
 module.exports = mongoose.model('Goof', GoofSchema);

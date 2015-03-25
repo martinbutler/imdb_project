@@ -28,15 +28,15 @@ rl.on('line', function(line) {
     if (line.length > 0) {
       // check for title identifier in line
       if(line.substring(0, 2) === "# ") {
-        if (newRecord._id) {
+        if (newRecord.title) {
           goofs.push(goof.trim().replace(/"/g, '\\"'));
-          newRecord.credit = goofs;
+          newRecord.goofs = goofs;
           fs.appendFileSync(outputFile, JSON.stringify(newRecord) + "\n");
         }
         newRecord = {};
         goofs = [];
         goof = '';
-        newRecord._id = line.substring(2).trim().replace(/"/g, '\\"');
+        newRecord.title = line.substring(2).trim().replace(/"/g, '\\"');
       // check for alternate start identifier in line
       } else if (line.substring(0, 2) === "- ") {
         if(goof) {
@@ -62,7 +62,7 @@ rl.on('line', function(line) {
   }
 }).on('close', function() {
   goofs.push(goof.trim().replace(/"/g, '\\"'));
-  newRecord.credit = goofs;
+  newRecord.goofs = goofs;
   fs.appendFileSync(outputFile, JSON.stringify(newRecord) + "\n");
 })
 
