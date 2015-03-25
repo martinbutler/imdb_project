@@ -61,4 +61,4 @@ rl.on('line', function(line) {
   }
 });
 
-// mongoimport --db imdbproject-dev --collection costumeDesigners --file costumeDesigners.json
+// mongoimport --db imdbproject-dev --collection costumedesigners --file costumeDesigners.json
