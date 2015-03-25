@@ -53,4 +53,4 @@ rl.on('line', function(line) {
   }
 });
 
-// mongoimport --db imdbproject-dev --collection isoAkaTitles --file isoAkaTitles.json
+// mongoimport --db imdbproject-dev --collection isoakatitles --file isoAkaTitles.json

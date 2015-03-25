@@ -4,9 +4,8 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var IsoAkaTitleSchema = new Schema({
-  name: String,
-  info: String,
-  active: Boolean
+  title: String,
+  aka: String
 });
 
 module.exports = mongoose.model('IsoAkaTitle', IsoAkaTitleSchema);
