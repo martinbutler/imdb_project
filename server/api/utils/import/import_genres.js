@@ -16,6 +16,7 @@ var rl = readline.createInterface({
    terminal: false
 });
 
+var atTitle = false;
 var atData = false;
 
 rl.on('line', function(line) {
@@ -34,7 +35,10 @@ rl.on('line', function(line) {
       }
     }
   // logic to skip non movie data at the head of the file
-  } else if(line === "==================") {
+  // logic to skip non movie data at the head of the file
+  } else if(line === "8: THE GENRES LIST") {
+    atTitle = true;  
+  } else if(atTitle && line === "==================") {
     atData = true;
     // delete output file if exists
     fs.unlink(outputFile, function(err) {
