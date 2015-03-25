@@ -5,8 +5,8 @@ var mongoose = require('mongoose'),
 
 var DirectorSchema = new Schema({
   name: String,
-  info: String,
-  active: Boolean
+  title: String,
+  additionalInfo: String
 });
 
 module.exports = mongoose.model('Director', DirectorSchema);
