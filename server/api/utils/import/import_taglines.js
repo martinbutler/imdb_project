@@ -31,7 +31,7 @@ rl.on('line', function(line) {
       } else {
         // check for title identifier in line
         if(line.substring(0, 2) === "# ") {
-          newRecord._id = line.substring(2).trim().replace(/"/g, '\\"');
+          newRecord.title = line.substring(2).trim().replace(/"/g, '\\"');
         } else {
           newRecord.tagline = line.trim().replace(/"/g, '\\"');
           fs.appendFileSync(outputFile, JSON.stringify(newRecord) + "\n");
