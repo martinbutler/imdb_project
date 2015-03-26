@@ -4,9 +4,11 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var RatingSchema = new Schema({
-  name: String,
-  info: String,
-  active: Boolean
+  title: String,
+  newMovie: String,
+  distribution: String,
+  votes: Number,
+  rank: Number
 });
 
 module.exports = mongoose.model('Rating', RatingSchema);
