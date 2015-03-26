@@ -4,9 +4,9 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var SoundtrackSchema = new Schema({
-  name: String,
-  info: String,
-  active: Boolean
+  title: String,
+  song: String,
+  attributes: []
 });
 
 module.exports = mongoose.model('Soundtrack', SoundtrackSchema);

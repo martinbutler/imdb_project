@@ -38,7 +38,6 @@ rl.on('line', function(line) {
           }
           newRecord = {}
           newRecord.title = line.substring(2).trim().replace(/"/g, '\\"');
-          // newRecord.attributes = [];
         } else {
           if(line.substring(0,2) === "- ") {
             if (newRecord.song) {
