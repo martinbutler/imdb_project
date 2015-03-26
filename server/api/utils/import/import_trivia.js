@@ -28,7 +28,7 @@ rl.on('line', function(line) {
     if (line.length > 0) {
       // check for title identifier in line
       if(line.substring(0, 2) === "# ") {
-        if (newRecord._id) {
+        if (newRecord.title) {
           triviaArr.push(trivia.trim().replace(/"/g, '\\"'));
           newRecord.trivia = triviaArr;
           fs.appendFileSync(outputFile, JSON.stringify(newRecord) + "\n");
@@ -36,7 +36,7 @@ rl.on('line', function(line) {
         newRecord = {};
         triviaArr = [];
         trivia = '';
-        newRecord._id = line.substring(2).trim().replace(/"/g, '\\"');
+        newRecord.title = line.substring(2).trim().replace(/"/g, '\\"');
       // check for alternate start identifier in line
       } else if (line.substring(0, 2) === "- ") {
         if(trivia) {
