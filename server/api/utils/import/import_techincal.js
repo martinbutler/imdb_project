@@ -49,4 +49,4 @@ rl.on('line', function(line) {
   }
 });
 
-// mongoimport --db imdbproject-dev --technical colorInfo --file technical.json
+// mongoimport --db imdbproject-dev --collection technical --file technical.json
