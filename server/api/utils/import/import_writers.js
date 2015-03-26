@@ -32,13 +32,16 @@ rl.on('line', function(line) {
         var parseArray = line.split('\t');
         // check if line is includes writers name
         if (parseArray[0] !== '') {
-          newRecord._id = parseArray[0].trim().replace(/"/g, '\\"');
+          newRecord.name = parseArray[0].trim().replace(/"/g, '\\"');
         }
         var fullTitleData = parseArray[parseArray.length-1];
         var splitIt = fullTitleData.split("  ");
         newRecord.title = splitIt[0].trim().replace(/"/g, '\\"');
-        newRecord.attributes = splitIt.slice(1);
+        if(splitIt.length > 1) {
+          newRecord.attributes = splitIt.slice(1);
+        }
         fs.appendFileSync(outputFile, JSON.stringify(newRecord) + "\n");
+        delete newRecord.attributes;
       }
     }
   // logic to skip non movie data at the head of the file
