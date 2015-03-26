@@ -52,4 +52,4 @@ rl.on('line', function(line) {
   }
 });
 
-// mongoimport --db imdbproject-dev --collection specialEffectsCompanies --file specialEffectsCompanies.json
+// mongoimport --db imdbproject-dev --collection specialeffectscompanies --file specialEffectsCompanies.json

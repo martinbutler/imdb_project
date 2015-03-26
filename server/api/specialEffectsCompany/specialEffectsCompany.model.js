@@ -4,9 +4,9 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var SpecialEffectsCompanySchema = new Schema({
+  title: String,
   name: String,
-  info: String,
-  active: Boolean
+  attributes: String
 });
 
 module.exports = mongoose.model('SpecialEffectsCompany', SpecialEffectsCompanySchema);
