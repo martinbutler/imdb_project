@@ -28,7 +28,7 @@ rl.on('line', function(line) {
       } else {
         var newRecord = {}
         var parseArray = line.split('\t');
-        newRecord._id = parseArray[0].trim().replace(/"/g, '\\"');
+        newRecord.title = parseArray[0].trim().replace(/"/g, '\\"');
         newRecord.year = parseArray[parseArray.length-1].trim().replace(/"/g, '\\"');
         fs.appendFileSync(outputFile, JSON.stringify(newRecord) + "\n");
       }
@@ -45,3 +45,5 @@ rl.on('line', function(line) {
     });
   }
 });
+
+// mongoimport --db imdbproject-dev --collection movies --file movies.json
