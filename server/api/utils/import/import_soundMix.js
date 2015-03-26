@@ -59,4 +59,4 @@ rl.on('line', function(line) {
   }
 });
 
-// mongoimport --db imdbproject-dev --collection soundMixes --file soundMixes.json
+// mongoimport --db imdbproject-dev --collection soundmixes --file soundMixes.json
