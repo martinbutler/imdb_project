@@ -53,4 +53,4 @@ rl.on('line', function(line) {
   }
 });
 
-// mongoimport --db imdbproject-dev --collection runningTimes --file runningTimes.json
+// mongoimport --db imdbproject-dev --collection runningtimes --file runningTimes.json
