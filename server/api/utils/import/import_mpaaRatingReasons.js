@@ -23,12 +23,12 @@ rl.on('line', function(line) {
   if (atData) {
     // check for title identifier in line
     if(line.substring(0, 3) === "MV:") {
-      if (newRecord._id) {
+      if (newRecord.title) {
         newRecord.reason = newRecord.reason.trim().replace(/"/g, '\\"');
         fs.appendFileSync(outputFile, JSON.stringify(newRecord) + "\n");
       }
       newRecord = {};
-      newRecord._id = line.substring(4).trim().replace(/"/g, '\\"');;
+      newRecord.title = line.substring(4).trim().replace(/"/g, '\\"');;
     // check for reason identifier in line
     } else if (line.substring(0, 3) === "RE:") {
       // address multi-line reasons
@@ -50,4 +50,4 @@ rl.on('line', function(line) {
   fs.appendFileSync(outputFile, JSON.stringify(newRecord) + "\n");
 });
 
-// mongoimport --db imdbproject-dev --collection mpaaRatingReasons --file mpaaRatingReasons.json
+// mongoimport --db imdbproject-dev --collection mpaaratingreasons --file mpaaRatingReasons.json
