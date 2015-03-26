@@ -4,9 +4,9 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var RunningTimeSchema = new Schema({
-  name: String,
-  info: String,
-  active: Boolean
+  title: String,
+  runTime: String,
+  misc: String
 });
 
 module.exports = mongoose.model('RunningTime', RunningTimeSchema);
