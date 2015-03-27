@@ -9,6 +9,7 @@ var errors = require('./components/errors');
 module.exports = function(app) {
 
   // Insert routes below
+  app.use('/api/miscellaneous', require('./api/miscellaneous'));
   app.use('/api/soundMixes', require('./api/soundMix'));
   app.use('/api/soundtracks', require('./api/soundtrack'));
   app.use('/api/specialEffectsCompanies', require('./api/specialEffectsCompany'));

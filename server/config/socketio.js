@@ -18,6 +18,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/miscellaneous/miscellaneous.socket').register(socket);
   require('../api/soundMix/soundMix.socket').register(socket);
   require('../api/soundtrack/soundtrack.socket').register(socket);
   require('../api/specialEffectsCompany/specialEffectsCompany.socket').register(socket);
