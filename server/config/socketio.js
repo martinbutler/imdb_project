@@ -18,6 +18,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/releaseDate/releaseDate.socket').register(socket);
   require('../api/productionCompany/productionCompany.socket').register(socket);
   require('../api/plot/plot.socket').register(socket);
   require('../api/movieLink/movieLink.socket').register(socket);
