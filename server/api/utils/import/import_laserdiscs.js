@@ -23,8 +23,8 @@ var newRecord = {};
 rl.on('line', function(line) {
   if (atData) {
     // skip blank lines
-    if (line.length > 0) {
-      if (line.substring(0, 4) ==='----' && newRecord.OT) {
+    if (line.length > 0 && line.substring(0, 4) !=='----') {
+      if (newRecord.OT) {
         fs.appendFileSync(outputFile, JSON.stringify(newRecord) + "\n");
         newRecord = {};
       } else {
@@ -37,7 +37,7 @@ rl.on('line', function(line) {
   // logic to skip non movie data at the head of the file
   } else if(line === "LASERDISC LIST") {
     atTitle = true;
-  } else if (atTitle && line === '==============') {
+  } else if (atTitle && line.substring(0, 4) ==='----') {
     atData = true;
     // delete output file if exists
     fs.unlink(outputFile, function(err) {
