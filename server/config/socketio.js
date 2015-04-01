@@ -18,6 +18,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/literature/literature.socket').register(socket);
   require('../api/quote/quote.socket').register(socket);
   require('../api/releaseDate/releaseDate.socket').register(socket);
   require('../api/productionCompany/productionCompany.socket').register(socket);
