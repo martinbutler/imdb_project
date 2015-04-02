@@ -19,8 +19,8 @@ var rl = readline.createInterface({
 var atTitle = false;
 var atData = false;
 var newRecord = {};
-newRecord.literatures = []; 
-var literature = '';
+// newRecord.literatures = [];
+// var literature = '';
 
 rl.on('line', function(line) {
   if (atData) {
@@ -36,7 +36,7 @@ rl.on('line', function(line) {
       } else {
         if (!newRecord[line.substring(0, 4)]) {
           newRecord[line.substring(0, 4)] = [];
-        } 
+        }
         newRecord[line.substring(0, 4)].push(line.substring(5).trim().replace(/"/g, '\\"'));
       }
     }
