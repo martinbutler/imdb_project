@@ -18,6 +18,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/productionDesigner/productionDesigner.socket').register(socket);
   require('../api/laserdisc/laserdisc.socket').register(socket);
   require('../api/literature/literature.socket').register(socket);
   require('../api/quote/quote.socket').register(socket);
