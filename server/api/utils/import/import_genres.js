@@ -37,7 +37,7 @@ rl.on('line', function(line) {
   // logic to skip non movie data at the head of the file
   // logic to skip non movie data at the head of the file
   } else if(line === "8: THE GENRES LIST") {
-    atTitle = true;  
+    atTitle = true;
   } else if(atTitle && line === "==================") {
     atData = true;
     // delete output file if exists
@@ -49,3 +49,5 @@ rl.on('line', function(line) {
     });
   }
 });
+
+// mongoimport --db imdbproject-dev --collection genres --file genres.json
