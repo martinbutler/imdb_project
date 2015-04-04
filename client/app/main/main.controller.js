@@ -9,6 +9,19 @@ angular.module('imdbProjectApp')
       socket.syncUpdates('thing', $scope.awesomeThings);
     });
 
+    var actors = [];
+    $http.get('/api/actors/distinctActors/').success(function(a) {
+      actors = a;
+      console.log('a', a);
+    });
+
+
+    var oneRecord = [];
+    $http.get('/api/actors/551db8d7edd2d608c80a14fd').success(function(a) {
+      oneRecord = a;
+      console.log('oneRecord', a);
+    });
+
     $scope.addThing = function() {
       if($scope.newThing === '') {
         return;
