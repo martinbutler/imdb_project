@@ -2,39 +2,26 @@
 
 angular.module('imdbProjectApp')
   .controller('MainCtrl', function ($scope, $http, socket) {
-    $scope.awesomeThings = [];
+    var actorCombined = [];
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
-      socket.syncUpdates('thing', $scope.awesomeThings);
-    });
+    $scope.searchActors = function() {
+      actorCombined = [];
+      $http.get('/api/actors/distinctActors/' + $scope.actorSearch).success(function(a) {
+        actorCombine(a);
+      });
+      $http.get('/api/actresses/distinctActresses/' + $scope.actorSearch).success(function(a) {
+        actorCombine(a);
+      });
+    };
 
-    var actors = [];
-    $http.get('/api/actors/distinctActors/').success(function(a) {
-      actors = a;
-      console.log('a', a);
-    });
+    var actorCombine = function(a) {
+      actorCombined = actorCombined.concat(a);
+      console.log(actorCombined, 'actorCombined');
+    };
 
-
-    var oneRecord = [];
-    $http.get('/api/actors/551db8d7edd2d608c80a14fd').success(function(a) {
-      oneRecord = a;
+    // test backend on page load
+    $http.get('/api/actors/551db908edd2d608c83aeeac').success(function(a) {
       console.log('oneRecord', a);
     });
 
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
-        return;
-      }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
-    };
-
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
-    };
-
-    $scope.$on('$destroy', function () {
-      socket.unsyncUpdates('thing');
-    });
   });

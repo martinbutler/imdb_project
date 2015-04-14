@@ -58,7 +58,7 @@ exports.destroy = function(req, res) {
 
 // Get distinct of values from name field
 exports.distinctActors = function(req, res) {
-  var r = new RegExp("rob", 'i');
+  var r = new RegExp(req.params.name, 'i');
   var start = Date.now();
   Actor.aggregate([{$match: {name: {$regex:r}}},
                   {$group: {_id: '$name', titleSum:{$sum:1}}}],
