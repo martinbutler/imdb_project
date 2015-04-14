@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Actor = require('./actor.model');
+var async = require('async');
 
 // Get list of actors
 exports.index = function(req, res) {
@@ -69,6 +70,46 @@ exports.distinctActors = function(req, res) {
     console.log('time', end - start);
     if(err) { return handleError(res, err); }
     return res.json(200, actorNames);
+  });
+};
+
+// 6 degrees
+exports.sixdegrees = function(req, res) {
+  var degree = 1, maxDegree = 6;
+  var degreeTitles = {};
+  // if (!req.params.bacon) {
+  //   req.params.bacon = "Bacon, Kevin (I)";
+  // }
+  // if (!req.params.other) {
+  //   req.params.other = "Bonneville, Hugh";
+  // }
+  Actor.find({name: req.params.other}, {title: 1, _id: 0}, function(err, titles) {
+    degreeTitles[degree] = titles;
+    async.each(titles, function(title, callback) {
+      console.log('title', title);
+    });
+    // for(var i = 0, len = titles.length; i < len; i++) {
+    //   console.log('i', i);
+    //   console.log('titles[i]', titles[i]);
+    //   Actor.find({title: titles[i]}, {name: 1, _id:0}, function(err, titles) {
+    //     console.log('i find', i);
+    //     console.log('titles', titles);
+    //     if(titles.indexOf(req.params.bacon) >=0) {
+    //       console.log(titles[titles.indexOf(req.params.bacon)]);
+    //       i = len;
+    //     }
+    //   });
+    // }
+    // titles.forEach(function(title) {
+    //   console.log('title****************', title);
+    //   Actor.find({title: title}, {name: 1, _id:0}, function(err, titles) {
+    //     console.log('forEach', titles);
+    //     if(titles.indexOf(req.params.bacon) >=0) {
+    //       console.log(titles[titles.indexOf(req.params.bacon)]);
+    //     }
+    //   });
+    // });
+    // console.log(degreeTitles);
   });
 };
 

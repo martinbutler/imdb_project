@@ -24,4 +24,12 @@ angular.module('imdbProjectApp')
       console.log('oneRecord', a);
     });
 
+    // sixdegrees
+    // var other = "Bonneville, Hugh";
+    var other = "De Niro, Robert",
+        bacon = "Bacon, Kevin (I)";
+    $http.get('/api/actors/sixdegrees/' + other + "/" + bacon + '/').success(function(a) {
+      console.log('bacon', a);
+    });
+
   });
