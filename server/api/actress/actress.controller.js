@@ -54,6 +54,22 @@ exports.destroy = function(req, res) {
   });
 };
 
+// Get distinct of values from name field
+exports.distinctActresses = function(req, res) {
+  var r = new RegExp(req.params.name, 'i');
+  var start = Date.now();
+  Actress.aggregate([{$match: {name: {$regex:r}}},
+                  {$group: {_id: '$name', titleSum:{$sum:1}}}],
+                  function (err, actorNames) {
+
+    console.log('count', actorNames.length);
+    var end =  Date.now();
+    console.log('time', end - start);
+    if(err) { return handleError(res, err); }
+    return res.json(200, actorNames);
+  });
+};
+
 function handleError(res, err) {
   return res.send(500, err);
 }

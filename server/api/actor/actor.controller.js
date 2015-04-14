@@ -5,7 +5,9 @@ var Actor = require('./actor.model');
 
 // Get list of actors
 exports.index = function(req, res) {
+  console.log('get actors - index');
   Actor.find(function (err, actors) {
+    console.log('actors', actors);
     if(err) { return handleError(res, err); }
     return res.json(200, actors);
   });
@@ -51,6 +53,22 @@ exports.destroy = function(req, res) {
       if(err) { return handleError(res, err); }
       return res.send(204);
     });
+  });
+};
+
+// Get distinct of values from name field
+exports.distinctActors = function(req, res) {
+  var r = new RegExp(req.params.name, 'i');
+  var start = Date.now();
+  Actor.aggregate([{$match: {name: {$regex:r}}},
+                  {$group: {_id: '$name', titleSum:{$sum:1}}}],
+                  function (err, actorNames) {
+
+    console.log('count', actorNames.length);
+    var end =  Date.now();
+    console.log('time', end - start);
+    if(err) { return handleError(res, err); }
+    return res.json(200, actorNames);
   });
 };
 

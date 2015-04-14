@@ -5,6 +5,7 @@ var controller = require('./actor.controller');
 
 var router = express.Router();
 
+router.get('/distinctActors/:name', controller.distinctActors);
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
