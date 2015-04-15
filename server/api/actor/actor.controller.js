@@ -85,9 +85,80 @@ exports.sixdegrees = function(req, res) {
   // }
   Actor.find({name: req.params.other}, {title: 1, _id: 0}, function(err, titles) {
     degreeTitles[degree] = titles;
-    async.each(titles, function(title, callback) {
-      console.log('title', title);
+    var matchFound = false;
+    // _.forEach(titles, function(n, key) {
+    //   Actor.find({title: n.title}, {name: 1, _id: 0}, function(err, names) {
+    //     var match = _.findIndex(names, function(name) {
+    //       console.log('name.name', name.name);
+    //       return name.name === req.params.bacon;
+    //     });
+    //     if(match >=0) {
+    //       console.log('found *******************', match)
+    //       matchFound = true;
+    //     }
+    //   });
+    //   console.log('matchFound', matchFound);
+    //   return !matchFound;
+    // });
+
+    _.forEach(titles, function(n, key) {
+      // Actor.find({title: n.title}, {name: 1, _id: 0}, function(err, names) {
+      //   var match = _.findIndex(names, function(name) {
+      //     console.log('name.name', name.name);
+      //     return name.name === req.params.bacon;
+      //   });
+      //   if(match >=0) {
+      //     console.log('found *******************', match)
+      //     matchFound = true;
+      //   }
+      // });
+      // return !matchFound;
+      console.log('n',n);
+      return !findBacon(n, req.params.bacon);
     });
+
+    function findBacon(n, bacon) {
+      Actor.find({title: n.title}, {name: 1, _id: 0}, function(err, names) {
+        var match = _.findIndex(names, function(name) {
+          // console.log('name.name', name.name);
+          return name.name === bacon;
+        });
+        if(match >=0) {
+          console.log('found *******************', match)
+          matchFound = true;
+        }
+        console.log(matchFound);
+        return matchFound;
+      });
+    }
+    // titles.every(function(n) {
+    //   Actor.find({title: n.title}, {name: 1, _id: 0}, function(err, names) {
+    //     var match = _.findIndex(names, function(name) {
+    //       console.log(n.title);
+    //       console.log('name.name', name.name);
+    //       return name.name === req.params.bacon;
+    //     });
+    //     if(match >=0) {
+    //       console.log('found *******************', match)
+    //       return false;
+    //     } else {
+    //       console.log('not found')
+
+    //     }
+    //     return n;
+    //   });
+
+    // })
+    // async.each(titles, function(title, callback) {
+    //   Actor.find({title: title.title}, {name: 1, _id: 0}, function(err, names) {
+    //     console.log('find', title);
+    //     // console.log('names', names);
+    //     console.log('bacon', req.params.bacon);
+    //     if(names.indexOf(req.params.bacon) >=0) {
+    //       console.log('found: ' + names[names.indexOf(req.params.bacon)] + "   title: " + title);
+    //     }
+    //   });
+    // });
     // for(var i = 0, len = titles.length; i < len; i++) {
     //   console.log('i', i);
     //   console.log('titles[i]', titles[i]);
