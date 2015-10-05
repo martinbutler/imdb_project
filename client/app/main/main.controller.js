@@ -2,31 +2,34 @@
 
 angular.module('imdbProjectApp')
   .controller('MainCtrl', function ($scope, $http, socket, ngTableParams, $filter) {
-    var actorCombined = [];
+    var searchResultsCombined = [];
 
     $scope.searchActors = function() {
-      actorCombined = [];
-      $http.get('/api/actors/distinctActors/' + $scope.actorSearch).success(function(a) {
-        actorCombine(a, 'Actor/Actress');
+      searchResultsCombined = [];
+      $http.get('/api/actors/distinctActors/' + $scope.nameSearch).success(function(a) {
+        searchResultCombine(a, 'Actor/Actress');
       });
-      $http.get('/api/actresses/distinctActresses/' + $scope.actorSearch).success(function(a) {
-        actorCombine(a, 'Actor/Actress');
+      $http.get('/api/actresses/distinctActresses/' + $scope.nameSearch).success(function(a) {
+        searchResultCombine(a, 'Actor/Actress');
+      });
+      $http.get('/api/directors/distinctDirectors/' + $scope.nameSearch).success(function(a) {
+        searchResultCombine(a, 'Directors');
       });
     };
     var data = [];  // init search results array
-    var actorCombine = function(a, t) {
+    var searchResultCombine = function(a, t) {
       var reformattedArray = a.map(function(obj){
          obj['table'] = t;
 
          return obj;
       });
-      actorCombined = actorCombined.concat(a.map(function(obj){
+      searchResultsCombined = searchResultsCombined.concat(a.map(function(obj){
          obj['table'] = t;
 
          return obj;
       }));
-      console.log(actorCombined, 'actorCombined');
-      data = actorCombined;
+      console.log(searchResultsCombined, 'searchResultsCombined', t);
+      data = searchResultsCombined;
         $scope.tableParams.reload();
         $scope.tableParams.total(data.length);
     };

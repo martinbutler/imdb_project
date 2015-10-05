@@ -5,6 +5,7 @@ var controller = require('./director.controller');
 
 var router = express.Router();
 
+router.get('/distinctDirectors/:name', controller.distinctDirectors);
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.post('/', controller.create);

@@ -3,6 +3,26 @@
 var _ = require('lodash');
 var Director = require('./director.model');
 
+
+// Get distinct of values from name field
+exports.distinctDirectors = function(req, res) {
+  var r = new RegExp(req.params.name, 'i');
+  var start = Date.now();
+  Director.aggregate([{$match: {name: {$regex:r}}},
+                  {$group: {_id: '$name', titleSum:{$sum:1}}}],
+                  function (err, directorNames) {
+
+    console.log('director count', directorNames.length);
+    var end =  Date.now();
+    console.log('time', end - start);
+    if(err) { return handleError(res, err); }
+    return res.json(200, directorNames);
+  });
+};
+
+
+
+
 // Get list of directors
 exports.index = function(req, res) {
   Director.find(function (err, directors) {
