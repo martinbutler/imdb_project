@@ -3,7 +3,7 @@ var fs = require('fs'),
    stream = require('stream');
 
 
-var outputFile = './importFiles/plots.json';
+var outputFile = './importFiles/plot.json';
 
 var instream = fs.createReadStream('../../../stage/plot.list', {encoding: 'binary'});
 var outstream = new stream;
@@ -19,7 +19,7 @@ var rl = readline.createInterface({
 var atTitle = false;
 var atData = false;
 var newRecord = {};
-newRecord.plots = []; 
+newRecord.plots = [];
 var plot = '';
 
 rl.on('line', function(line) {

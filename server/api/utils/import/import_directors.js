@@ -82,7 +82,6 @@ rl.on('line', function(line) {
         // if no other match for title is found, use the full title data
         if (!newRecord.title) {
           newRecord.title = fullTitleData.replace(/"/g, '\\"');
-          console.log(fullTitleData)
         }
         // parse additionalInfo, if it exists
         if (additionalInfoMatch = fullTitleData.substring(newRecord.title.length).trim()) {

@@ -63,7 +63,7 @@ rl.on('line', function(line) {
         if (!newRecord.title) {
           while (i < parMatchLen){
             if (parMatches[i] === "(TV)" || parMatches[i] === "(V)" || parMatches[i] === "(VG)"){
-              newRecordtitle = fullTitleData.substring(0, fullTitleData.indexOf(parMatches[i]) + parMatches[i].length).replace(/"/g, '\\"');
+              newRecord.title = fullTitleData.substring(0, fullTitleData.indexOf(parMatches[i]) + parMatches[i].length).replace(/"/g, '\\"');
               i = parMatchLen;
             }
             i++;

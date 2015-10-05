@@ -18,7 +18,7 @@ gunzip -c ../../../stage/alternate-versions.list.gz > ../../../stage/alternate-v
 node import_alternateVersions.js
 mongoimport --db imdbproject-dev --collection alternateversions --file ./importFiles/alternateVersions.json
 
-gunzip -c ../../../stage/buisness.list.gz > ../../../stage/buisness.list
+gunzip -c ../../../stage/business.list.gz > ../../../stage/business.list
 node import_business.js
 mongoimport --db imdbproject-dev --collection business --file ./importFiles/business.json
 
@@ -46,7 +46,7 @@ gunzip -c ../../../stage/composers.list.gz > ../../../stage/composers.list
 node import_composers.js
 mongoimport --db imdbproject-dev --collection composers --file ./importFiles/composers.json
 
-gunzip -c ../../../stage/costume-desingers.list.gz > ../../../stage/costume-desingers.list
+gunzip -c ../../../stage/costume-designers.list.gz > ../../../stage/costume-designers.list
 node import_costumeDesigners.js
 mongoimport --db imdbproject-dev --collection costumedesigners --file ./importFiles/costumeDesigners.json
 
@@ -126,9 +126,9 @@ gunzip -c ../../../stage/mpaa-ratings-reasons.list.gz > ../../../stage/mpaa-rati
 node import_mpaaRatingReasons.js
 mongoimport --db imdbproject-dev --collection mpaaratingreasons --file ./importFiles/mpaaRatingReasons.json
 
-gunzip -c ../../../stage/plots.list.gz > ../../../stage/plots.list
+gunzip -c ../../../stage/plot.list.gz > ../../../stage/plot.list
 node import_plots.js
-mongoimport --db imdbproject-dev --collection plot --file ./importFiles/plots.json
+mongoimport --db imdbproject-dev --collection plot --file ./importFiles/plot.json
 
 gunzip -c ../../../stage/producers.list.gz > ../../../stage/producers.list
 node import_producers.js
@@ -166,7 +166,7 @@ gunzip -c ../../../stage/soundtracks.list.gz > ../../../stage/soundtracks.list
 node import_soundtracks.js
 mongoimport --db imdbproject-dev --collection soundtracks --file ./importFiles/soundtracks.json
 
-gunzip -c ../../../stage/speical-effects-companies.list.gz > ../../../stage/speical-effects-companies.list
+gunzip -c ../../../stage/special-effects-companies.list.gz > ../../../stage/special-effects-companies.list
 node import_specialEffectsCompanies.js
 mongoimport --db imdbproject-dev --collection specialeffectscompanies --file ./importFiles/specialEffectsCompanies.json
 
@@ -182,6 +182,6 @@ gunzip -c ../../../stage/trivia.list.gz > ../../../stage/trivia.list
 node import_trivia.js
 mongoimport --db imdbproject-dev --collection trivia --file ./importFiles/trivia.json
 
-gunzip -c ../../../stage/writes.list.gz > ../../../stage/writers.list
+gunzip -c ../../../stage/writers.list.gz > ../../../stage/writers.list
 node import_writers.js
 mongoimport --db imdbproject-dev --collection writers --file ./importFiles/writers.json

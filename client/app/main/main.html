@@ -17,6 +17,25 @@
 
 
 </div>
+
+
+<table ng-table="tableParams" class="table" export-csv="csv">
+  <tr ng-repeat="record in $data">
+    <td data-title="'Chromosome'" sortable="'chrom'">{{record.chrom}}</td>
+    <td data-title="'Name'" sortable="'name'">{{record.name}}</td>
+    <td data-title="'txStart'" sortable="'txStart'">{{record.txStart}}</td>
+    <td data-title="'txEnd'" sortable="'txEnd'">{{record.txEnd}}</td>
+  </tr>
+</table>
+
+<!-- <table ng-table="actor.tableParams" show-filter="true" class="table table-bordered table-striped">
+      <tr ng-repeat="row in $data track by row.id">
+        <td title="'Installation At'" filter="{installationAt: 'text'}" sortable="'installationAt'">{{row.installationAt}}</td>
+        <td title="'Admin Email'" filter="{adminEmail: 'text'}" sortable="'adminEmail'">{{row.adminEmail}}</td>
+        <td title="'Powered By'" filter="{poweredBy: 'text'}" sortable="'poweredBy'">{{row.poweredBy}}</td>
+        <td title="'Powered By Icon'" filter="{poweredByIcon: 'text'}" sortable="'poweredByIcon'">{{row.poweredByIcon}}</td>
+      </tr>
+    </table> -->
 <!-- <div class="container">
   <div class="row">
     <div class="col-lg-12">
