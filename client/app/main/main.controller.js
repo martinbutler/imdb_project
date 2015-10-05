@@ -17,7 +17,7 @@ angular.module('imdbProjectApp')
     var actorCombine = function(a) {
       actorCombined = actorCombined.concat(a);
       console.log(actorCombined, 'actorCombined');
-      data = aactorCombined;
+      data = actorCombined;
         $scope.tableParams.reload();
         $scope.tableParams.total(data.length);
     };

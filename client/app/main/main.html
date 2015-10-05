@@ -21,10 +21,10 @@
 
 <table ng-table="tableParams" class="table" export-csv="csv">
   <tr ng-repeat="record in $data">
-    <td data-title="'Chromosome'" sortable="'chrom'">{{record.chrom}}</td>
-    <td data-title="'Name'" sortable="'name'">{{record.name}}</td>
-    <td data-title="'txStart'" sortable="'txStart'">{{record.txStart}}</td>
-    <td data-title="'txEnd'" sortable="'txEnd'">{{record.txEnd}}</td>
+    <td data-title="'Actor/Actress'" sortable="'_id'">{{record._id}}</td>
+    <td data-title="'Number of Credits'" sortable="'titleSum'">{{record.titleSum}}</td>
+    <!-- <td data-title="'txStart'" sortable="'txStart'">{{record.txStart}}</td>
+    <td data-title="'txEnd'" sortable="'txEnd'">{{record.txEnd}}</td> -->
   </tr>
 </table>
 
