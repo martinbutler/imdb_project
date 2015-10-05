@@ -28,3 +28,103 @@
     margin-top: 70px;
     border-top: 1px solid #E5E5E5;
 }
+
+// Default table styling
+.searchDefault {
+  table, th, td {
+    border: 1px solid black;
+    text-align: center;
+    table-layout: fixed;
+    margin-top: 10px;
+  }
+  th {
+      background-color: #384da0;
+      color: white;
+      overflow: hidden;
+  }
+  tr:nth-of-type(even) {
+    background-color:#E3E3E3;
+  }
+  .sort-asc, .sort-desc{
+    color: black;
+  }
+}
+
+// user selectable option for table styling
+.searchMidnight {
+  table, th, td {
+    border: 1px solid black;
+    text-align: center;
+    table-layout: fixed;
+    margin-top: 10px;
+  }
+  th {
+      background-color: black;
+      color: white;
+      overflow: hidden;
+  }
+  tr:nth-of-type(even) {
+    background-color: black;
+    color: white;
+  }
+  tr:nth-of-type(odd) {
+    background-color: #A1A1A1;
+    color: white;
+  }
+  .sort-asc, .sort-desc{
+    color: black;
+  }
+}
+
+// user selectable option for table styling
+.searchEmerald {
+  table, th, td {
+    border: 1px solid black;
+    text-align: center;
+    table-layout: fixed;
+    margin-top: 10px;
+  }
+  th {
+      background-color: darkgreen;
+      color: white;
+      overflow: hidden;
+  }
+  tr:nth-of-type(even) {
+    background-color: green;
+    color: white;
+  }
+  tr:nth-of-type(odd) {
+    background-color: lightgreen;
+    color: white;
+  }
+  .sort-asc, .sort-desc{
+    color: black;
+  }
+}
+
+// user selectable option for table styling
+.searchBlues {
+  table, th, td {
+    border: 1px solid black;
+    text-align: center;
+    table-layout: fixed;
+    margin-top: 10px;
+        color: white;
+  }
+  th {
+      background-color: darkblue;
+      color: white;
+      overflow: hidden;
+  }
+  tr:nth-of-type(even) {
+    background-color: blue;
+    // color: white;
+  }
+  tr:nth-of-type(odd) {
+    background-color: lightblue;
+    // color: white;
+  }
+  .sort-asc, .sort-desc{
+    color: black;
+  }
+}

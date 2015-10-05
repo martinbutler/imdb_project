@@ -7,15 +7,24 @@ angular.module('imdbProjectApp')
     $scope.searchActors = function() {
       actorCombined = [];
       $http.get('/api/actors/distinctActors/' + $scope.actorSearch).success(function(a) {
-        actorCombine(a);
+        actorCombine(a, 'Actor/Actress');
       });
       $http.get('/api/actresses/distinctActresses/' + $scope.actorSearch).success(function(a) {
-        actorCombine(a);
+        actorCombine(a, 'Actor/Actress');
       });
     };
     var data = [];  // init search results array
-    var actorCombine = function(a) {
-      actorCombined = actorCombined.concat(a);
+    var actorCombine = function(a, t) {
+      var reformattedArray = a.map(function(obj){
+         obj['table'] = t;
+
+         return obj;
+      });
+      actorCombined = actorCombined.concat(a.map(function(obj){
+         obj['table'] = t;
+
+         return obj;
+      }));
       console.log(actorCombined, 'actorCombined');
       data = actorCombined;
         $scope.tableParams.reload();
@@ -26,7 +35,7 @@ angular.module('imdbProjectApp')
     $scope.tableParams = new ngTableParams({
       page: 1,            // show first page
       count: 10,          // count per page
-      sorting: {}         // set a default sort
+      sorting: {"_id": 'asc'}         // set a default sort
     }, {
       total: data.length, // length of data
       getData: function($defer, params) {
@@ -49,6 +58,22 @@ angular.module('imdbProjectApp')
       }
 
     });
+
+    // user selectable css style options
+    $scope.userStyles = [{
+      'title': 'Default',
+      'css_class': 'searchDefault'
+    }, {
+      'title': 'Midnight',
+      'css_class': 'searchMidnight'
+    }, {
+      'title': 'Emerald',
+      'css_class': 'searchEmerald'
+    }, {
+      'title': 'Blues',
+      'css_class': 'searchBlues'
+    }]
+    $scope.userStyle = $scope.userStyles[0];  // default css style for table
 
     // // test backend on page load
     // $http.get('/api/actors/551db908edd2d608c83aeeac').success(function(a) {
