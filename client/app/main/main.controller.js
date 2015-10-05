@@ -15,6 +15,9 @@ angular.module('imdbProjectApp')
       $http.get('/api/directors/distinctDirectors/' + $scope.nameSearch).success(function(a) {
         searchResultCombine(a, 'Directors');
       });
+      $http.get('/api/producers/distinctProducers/' + $scope.nameSearch).success(function(a) {
+        searchResultCombine(a, 'Producers');
+      });
     };
     var data = [];  // init search results array
     var searchResultCombine = function(a, t) {

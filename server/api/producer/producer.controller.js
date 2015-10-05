@@ -3,6 +3,26 @@
 var _ = require('lodash');
 var Producer = require('./producer.model');
 
+
+
+// Get distinct of values from name field
+exports.distinctProducers = function(req, res) {
+  var r = new RegExp(req.params.name, 'i');
+  var start = Date.now();
+  Producer.aggregate([{$match: {name: {$regex:r}}},
+                  {$group: {_id: '$name', titleSum:{$sum:1}}}],
+                  function (err, producerNames) {
+
+    console.log('director count', producerNames.length);
+    var end =  Date.now();
+    console.log('time', end - start);
+    if(err) { return handleError(res, err); }
+    return res.json(200, producerNames);
+  });
+};
+
+
+
 // Get list of producers
 exports.index = function(req, res) {
   Producer.find(function (err, producers) {
