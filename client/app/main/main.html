@@ -21,9 +21,9 @@
 <div class="col-md-12" ng-show="tableParams.data.length > 0" ng-class="userStyle.css_class">
   <table ng-table="tableParams" class="table" export-csv="csv">
     <tr ng-repeat="record in $data">
-      <td data-title="'Actor/Actress'" sortable="'_id'">{{record._id}}</td>
-      <td data-title="'Number of Credits'" sortable="'titleSum'">{{record.titleSum}}</td>
+      <td data-title="'Name'" sortable="'_id'">{{record._id}}</td>
       <td data-title="'Type'" sortable="'table'">{{record.table}}</td>
+      <td data-title="'Number of Credits'" sortable="'titleSum'">{{record.titleSum}}</td>
       <!-- <td data-title="'txEnd'" sortable="'txEnd'">{{record.txEnd}}</td> -->
     </tr>
   </table>

@@ -3,6 +3,26 @@
 var _ = require('lodash');
 var Composer = require('./composer.model');
 
+
+
+// Get distinct of values from name field
+exports.distinctComposers = function(req, res) {
+  var r = new RegExp(req.params.name, 'i');
+  var start = Date.now();
+  Composer.aggregate([{$match: {name: {$regex:r}}},
+                  {$group: {_id: '$name', titleSum:{$sum:1}}}],
+                  function (err, composerNames) {
+
+    console.log('composer count', composerNames.length);
+    var end =  Date.now();
+    console.log('time', end - start);
+    if(err) { return handleError(res, err); }
+    return res.json(200, composerNames);
+  });
+};
+
+
+
 // Get list of composers
 exports.index = function(req, res) {
   Composer.find(function (err, composers) {
