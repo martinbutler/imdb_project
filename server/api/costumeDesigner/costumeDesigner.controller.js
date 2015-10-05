@@ -3,6 +3,29 @@
 var _ = require('lodash');
 var CostumeDesigner = require('./costumeDesigner.model');
 
+
+
+
+// Get distinct of values from name field
+exports.distinctCostumeDesigners = function(req, res) {
+  var r = new RegExp(req.params.name, 'i');
+  var start = Date.now();
+  CostumeDesigner.aggregate([{$match: {name: {$regex:r}}},
+                  {$group: {_id: '$name', titleSum:{$sum:1}}}],
+                  function (err, costumeDesignerNames) {
+
+    console.log('costumeDesigner count', costumeDesignerNames.length);
+    var end =  Date.now();
+    console.log('time', end - start);
+    if(err) { return handleError(res, err); }
+    return res.json(200, costumeDesignerNames);
+  });
+};
+
+
+
+
+
 // Get list of costumeDesigners
 exports.index = function(req, res) {
   CostumeDesigner.find(function (err, costumeDesigners) {
