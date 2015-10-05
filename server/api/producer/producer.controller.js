@@ -13,7 +13,7 @@ exports.distinctProducers = function(req, res) {
                   {$group: {_id: '$name', titleSum:{$sum:1}}}],
                   function (err, producerNames) {
 
-    console.log('director count', producerNames.length);
+    console.log('producer count', producerNames.length);
     var end =  Date.now();
     console.log('time', end - start);
     if(err) { return handleError(res, err); }

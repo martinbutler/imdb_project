@@ -18,6 +18,14 @@ angular.module('imdbProjectApp')
       $http.get('/api/producers/distinctProducers/' + $scope.nameSearch).success(function(a) {
         searchResultCombine(a, 'Producers');
       });
+      $http.get('/api/cinematographers/distinctCinematographers/' + $scope.nameSearch).success(function(a) {
+        searchResultCombine(a, 'Cinematographers');
+      });
+      // $http.get('/api/producers/distinctProducers/' + $scope.nameSearch).success(function(a) {
+      //   searchResultCombine(a, 'Producers');
+      // });
+
+
     };
     var data = [];  // init search results array
     var searchResultCombine = function(a, t) {

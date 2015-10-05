@@ -62,7 +62,7 @@ exports.distinctActresses = function(req, res) {
                   {$group: {_id: '$name', titleSum:{$sum:1}}}],
                   function (err, actorNames) {
 
-    console.log('count', actorNames.length);
+    console.log('Actress count', actorNames.length);
     var end =  Date.now();
     console.log('time', end - start);
     if(err) { return handleError(res, err); }

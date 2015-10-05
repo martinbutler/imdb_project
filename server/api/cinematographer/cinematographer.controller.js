@@ -3,6 +3,26 @@
 var _ = require('lodash');
 var Cinematographer = require('./cinematographer.model');
 
+
+
+// Get distinct of values from name field
+exports.distinctCinematographers = function(req, res) {
+  var r = new RegExp(req.params.name, 'i');
+  var start = Date.now();
+  Cinematographer.aggregate([{$match: {name: {$regex:r}}},
+                  {$group: {_id: '$name', titleSum:{$sum:1}}}],
+                  function (err, CinematographerNames) {
+
+    console.log('cinematographer count', CinematographerNames.length);
+    var end =  Date.now();
+    console.log('time', end - start);
+    if(err) { return handleError(res, err); }
+    return res.json(200, CinematographerNames);
+  });
+};
+
+
+
 // Get list of cinematographers
 exports.index = function(req, res) {
   Cinematographer.find(function (err, cinematographers) {
