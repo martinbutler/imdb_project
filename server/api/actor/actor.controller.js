@@ -73,6 +73,19 @@ exports.distinctActors = function(req, res) {
   });
 };
 
+// Get title and roles of an actor
+exports.actorTitles = function(req, res) {
+  var start = Date.now();
+  Actor.find({
+    name: req.params.name
+  }, function(err, actorRecords) {
+    var end =  Date.now();
+    console.log('time', end-start)
+    if(err) { return handleError(res, err); }
+    return res.json(200, actorRecords);
+  });
+};
+
 // 6 degrees
 exports.sixdegrees = function(req, res) {
   var degree = 1, maxDegree = 6;

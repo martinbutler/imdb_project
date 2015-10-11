@@ -7,6 +7,7 @@ var router = express.Router();
 
 router.get('/distinctActors/:name', controller.distinctActors);
 router.get('/sixdegrees/:other/:bacon', controller.sixdegrees);
+router.get('/actorsTitles/:name', controller.actorTitles);
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.post('/', controller.create);

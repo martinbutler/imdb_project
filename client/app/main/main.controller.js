@@ -33,7 +33,6 @@ angular.module('imdbProjectApp')
         collection: '/producers/distinctProducers/'
       }
     ];
-
     $scope.to_search = {
       collections: []
     }
@@ -45,26 +44,47 @@ angular.module('imdbProjectApp')
     };
 
     $scope.searchByName = function(){
+      clearResults();
+      $scope.resultShow.name_search = true;
       searchResultsCombined = [];
       $scope.to_search.collections.forEach(function(collection) {
         $http.get('api' + collection.collection + $scope.nameSearch).success(function(a) {
           searchResultCombine(a, collection.title);
         });
       });
+
+    }
+
+    $scope.getTitlesByNameAndTable = function(name, collection) {
+      searchResultsCombined = [];
+      clearResults();
+      var getUrl;
+      $scope.collection_tables.forEach(function(table) {
+        if(table.title === collection) {
+          console.log(table.collection.split("/"))
+          getUrl = 'api/' + table.collection.split('/')[1] +  "/" + table.collection.split('/')[1] + "Titles/" + name
+        }
+      })
+      $http.get(getUrl).success(function(a) {
+        console.log(a)
+        searchResultCombine(a, collection.title);
+      });
+      $scope.resultShow.titles_for_name = true;
     }
 
     var data = [];  // init search results array
     var searchResultCombine = function(a, t) {
-      var reformattedArray = a.map(function(obj){
-         obj['table'] = t;
-         return obj;
-      });
+      // var reformattedArray = a.map(function(obj){
+      //    obj['table'] = t;
+      //    return obj;
+      // });
       searchResultsCombined = searchResultsCombined.concat(a.map(function(obj){
          obj['table'] = t;
-
+         if(obj['title']) {
+           obj['title'] = obj['title'].replace(/\\"/g, "");
+         }
          return obj;
       }));
-      console.log(searchResultsCombined, 'searchResultsCombined', t);
       data = searchResultsCombined;
         $scope.tableParams.reload();
         $scope.tableParams.total(data.length);
@@ -98,6 +118,11 @@ angular.module('imdbProjectApp')
 
     });
 
+    // clear-results-object
+    var clearResults = function() {
+      $scope.resultShow = {};
+    }
+
     // user selectable css style options
     $scope.userStyles = [{
       'title': 'Default',
@@ -114,8 +139,8 @@ angular.module('imdbProjectApp')
     }]
     $scope.userStyle = $scope.userStyles[0];  // default css style for table
 
-    // // test backend on page load
-    // $http.get('/api/actors/551db908edd2d608c83aeeac').success(function(a) {
+    // test backend on page load
+    // $http.get('/api/actors/actorTitles/Baychester, Robert Delanor').success(function(a) {
     //   console.log('oneRecord', a);
     // });
 

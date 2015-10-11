@@ -14,7 +14,7 @@
     <div class="input-group">
       <input type="text" class="form-control" placeholder="Enter full or partial name here." ng-model="nameSearch">
       <span class="input-group-btn">
-        <button type="submit" class="btn btn-primary" ng-click="searchByName1()">Search</button>
+        <button type="submit" class="btn btn-primary" ng-click="searchByName()">Search</button>
       </span>
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->
@@ -28,18 +28,28 @@
         <input type="checkbox" checklist-model="to_search.collections" checklist-value="col"> {{col.title}}
       </label>
     </div><!-- /input-group -->
-    <button class='col-md-6 pull-right' ng-click="uncheckAll()">uncheck all</button>
-    <button class='col-md-6 pull-right' ng-click="checkAll()">check all</button>
+    <button class='col-md-6 pull-right btn btn-default' ng-click="uncheckAll()">uncheck all</button>
+    <button class='col-md-6 pull-right btn btn-default' ng-click="checkAll()">check all</button>
   </div><!-- /.col-lg-6 -->
 </div><!-- /.row -->
 
-<div class="col-md-12" ng-show="tableParams.data.length > 0" ng-class="userStyle.css_class">
+<div class="col-md-12" ng-show="tableParams.data.length > 0 && resultShow.name_search" ng-class="userStyle.css_class">
   <table ng-table="tableParams" class="table" export-csv="csv">
     <tr ng-repeat="record in $data">
-      <td data-title="'Name'" sortable="'_id'">{{record._id}}</td>
-      <td data-title="'Type'" sortable="'table'">{{record.table}}</td>
-      <td data-title="'Number of Credits'" sortable="'titleSum'">{{record.titleSum}}</td>
-      <!-- <td data-title="'txEnd'" sortable="'txEnd'">{{record.txEnd}}</td> -->
+        <td ng-show="resultShow.name_search"  data-title="'Name'" ng-click="getTitlesByNameAndTable(record._id, record.table)" sortable="'_id'"><a>{{record._id}}</a></td>
+        <td ng-show="resultShow.name_search"  data-title="'Type'" sortable="'table'">{{record.table}}</td>
+        <td ng-show="resultShow.name_search"  data-title="'Number of Credits'" sortable="'titleSum'">{{record.titleSum}}</td>
+        <!-- <td ng-if="true" data-title="'txEnd'" sortable="'txEnd'">{{record.txEnd}}</td> -->
+
+    </tr>
+  </table>
+</div>
+
+<div class="col-md-12" ng-show="tableParams.data.length > 0 && resultShow.titles_for_name" ng-class="userStyle.css_class">
+  <table ng-table="tableParams" class="table" export-csv="csv">
+    <tr ng-repeat="record in $data">
+        <td ng-show="resultShow.titles_for_name" data-title="'Title'" ng-click="getTitleDetails(record.title)" sortable="'_id'"><a>{{record.title}}</a></td>
+        <td ng-show="resultShow.titles_for_name"  data-title="'Role'" sortable="'table'">{{record.role}}</td>
     </tr>
   </table>
 </div>
