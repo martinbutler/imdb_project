@@ -7,7 +7,8 @@ angular.module('imdbProjectApp', [
   'btford.socket-io',
   'ui.router',
   'ui.bootstrap',
-  'ngTable'
+  'ngTable',
+  'checklist-model'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

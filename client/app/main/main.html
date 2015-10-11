@@ -8,15 +8,30 @@
   </div>
 </header> -->
 
-<div>
-  <label>Search for Actor</label>
-  <input type="text" class="form-control" placeholder="Enter full or partial name here." ng-model="nameSearch">
-  <span class="input-group-btn">
-    <button type="submit" class="btn btn-primary" ng-click="searchActors()">Search</button>
-  </span>
+<div class="row">
+  <div class="col-md-6">
+    <label>Search by Name</label>
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Enter full or partial name here." ng-model="nameSearch">
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-primary" ng-click="searchByName1()">Search</button>
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
 
-
-</div>
+<div class="row col-md-11">
+  <div class="col-md-6 jumbotron">
+    <label>Select collections you wish the search:</label>
+    <div class="input-group">
+      <label class="col-md-6" ng-repeat="col in collection_tables">&nbsp;
+        <input type="checkbox" checklist-model="to_search.collections" checklist-value="col"> {{col.title}}
+      </label>
+    </div><!-- /input-group -->
+    <button class='col-md-6 pull-right' ng-click="uncheckAll()">uncheck all</button>
+    <button class='col-md-6 pull-right' ng-click="checkAll()">check all</button>
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
 
 <div class="col-md-12" ng-show="tableParams.data.length > 0" ng-class="userStyle.css_class">
   <table ng-table="tableParams" class="table" export-csv="csv">
@@ -28,35 +43,6 @@
     </tr>
   </table>
 </div>
-
-<!-- <table ng-table="actor.tableParams" show-filter="true" class="table table-bordered table-striped">
-      <tr ng-repeat="row in $data track by row.id">
-        <td title="'Installation At'" filter="{installationAt: 'text'}" sortable="'installationAt'">{{row.installationAt}}</td>
-        <td title="'Admin Email'" filter="{adminEmail: 'text'}" sortable="'adminEmail'">{{row.adminEmail}}</td>
-        <td title="'Powered By'" filter="{poweredBy: 'text'}" sortable="'poweredBy'">{{row.poweredBy}}</td>
-        <td title="'Powered By Icon'" filter="{poweredByIcon: 'text'}" sortable="'poweredByIcon'">{{row.poweredByIcon}}</td>
-      </tr>
-    </table> -->
-<!-- <div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}<button type="button" class="close" ng-click="deleteThing(thing)">&times;</button></a></li>
-      </ul>
-    </div>
-  </div>
-
-  <form class="thing-form">
-    <label>Syncs in realtime across clients</label>
-    <p class="input-group">
-      <input type="text" class="form-control" placeholder="Add a new thing here." ng-model="newThing">
-      <span class="input-group-btn">
-        <button type="submit" class="btn btn-primary" ng-click="addThing()">Add New</button>
-      </span>
-    </p>
-  </form>
-</div> -->
 
 <!-- <footer class="footer">
   <div class="container">

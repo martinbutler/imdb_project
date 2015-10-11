@@ -3,36 +3,60 @@
 angular.module('imdbProjectApp')
   .controller('MainCtrl', function ($scope, $http, socket, ngTableParams, $filter) {
     var searchResultsCombined = [];
+    $scope.collection_tables = [
+      {
+        title: "Actors",
+        collection: '/actors/distinctActors/'
+      },
+      {
+        title: "Actresses",
+        collection: '/actresses/distinctActresses/'
+      },
+      {
+        title: "Cinematographers",
+        collection: '/cinematographers/distinctCinematographers/'
+      },
+      {
+        title: "Composers",
+        collection: '/composers/distinctComposers/'
+      },
+      {
+        title: "Costume Designers",
+        collection: '/costumeDesigners/distinctCostumeDesigners/'
+      },
+      {
+        title: "Directors",
+        collection: '/directors/distinctDirectors/'
+      },
+      {
+        title: "Producers",
+        collection: '/producers/distinctProducers/'
+      }
+    ];
 
-    $scope.searchActors = function() {
-      searchResultsCombined = [];
-      $http.get('/api/actors/distinctActors/' + $scope.nameSearch).success(function(a) {
-        searchResultCombine(a, 'Actor/Actress');
-      });
-      $http.get('/api/actresses/distinctActresses/' + $scope.nameSearch).success(function(a) {
-        searchResultCombine(a, 'Actor/Actress');
-      });
-      $http.get('/api/cinematographers/distinctCinematographers/' + $scope.nameSearch).success(function(a) {
-        searchResultCombine(a, 'Cinematographers');
-      });
-      $http.get('/api/composers/distinctComposers/' + $scope.nameSearch).success(function(a) {
-        searchResultCombine(a, 'Composers');
-      });
-      $http.get('/api/costumeDesigners/distinctCostumeDesigners/' + $scope.nameSearch).success(function(a) {
-        searchResultCombine(a, 'Costume Designers');
-      });
-      $http.get('/api/directors/distinctDirectors/' + $scope.nameSearch).success(function(a) {
-        searchResultCombine(a, 'Directors');
-      });
-      $http.get('/api/producers/distinctProducers/' + $scope.nameSearch).success(function(a) {
-        searchResultCombine(a, 'Producers');
-      });
+    $scope.to_search = {
+      collections: []
+    }
+    $scope.checkAll = function() {
+      $scope.to_search.collections = angular.copy($scope.collection_tables);
     };
+    $scope.uncheckAll = function() {
+      $scope.to_search.collections = [];
+    };
+
+    $scope.searchByName = function(){
+      searchResultsCombined = [];
+      $scope.to_search.collections.forEach(function(collection) {
+        $http.get('api' + collection.collection + $scope.nameSearch).success(function(a) {
+          searchResultCombine(a, collection.title);
+        });
+      });
+    }
+
     var data = [];  // init search results array
     var searchResultCombine = function(a, t) {
       var reformattedArray = a.map(function(obj){
          obj['table'] = t;
-
          return obj;
       });
       searchResultsCombined = searchResultsCombined.concat(a.map(function(obj){
