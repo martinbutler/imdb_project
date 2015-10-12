@@ -21,7 +21,7 @@ exports.distinctCinematographers = function(req, res) {
   });
 };
 
-// Get title and roles of an actress
+// Get title and roles of an cinematographers
 exports.cinematographerTitles = function(req, res) {
   var start = Date.now();
   Cinematographer.find({
@@ -34,6 +34,18 @@ exports.cinematographerTitles = function(req, res) {
   });
 };
 
+// cinematographersByTitles
+exports.cinematographersByTitles = function(req, res) {
+  var start = Date.now();
+  Cinematographer.find({
+    title: req.params.title
+  }, function(err, cinematographerRecords) {
+    var end =  Date.now();
+    console.log('time', end-start)
+    if(err) { return handleError(res, err); }
+    return res.json(200, cinematographerRecords);
+  });
+};
 
 // Get list of cinematographers
 exports.index = function(req, res) {
