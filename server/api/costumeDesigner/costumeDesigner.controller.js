@@ -22,7 +22,18 @@ exports.distinctCostumeDesigners = function(req, res) {
   });
 };
 
-
+// Get title and roles of an actress
+exports.costumeDesignerTitles = function(req, res) {
+  var start = Date.now();
+  CostumeDesigner.find({
+    name: req.params.name
+  }, function(err, costumeDesignersRecords) {
+    var end =  Date.now();
+    console.log('time', end-start)
+    if(err) { return handleError(res, err); }
+    return res.json(200, costumeDesignersRecords);
+  });
+};
 
 
 

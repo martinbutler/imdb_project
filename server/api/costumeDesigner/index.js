@@ -6,6 +6,7 @@ var controller = require('./costumeDesigner.controller');
 var router = express.Router();
 
 router.get('/distinctCostumeDesigners/:name', controller.distinctCostumeDesigners);
+router.get('/costumeDesignersTitles/:name', controller.costumeDesignerTitles);
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
