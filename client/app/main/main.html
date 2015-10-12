@@ -55,7 +55,7 @@
       <div class="col-md-12" ng-class="userStyle.css_class" ng-show="tableParams.data.length > 0 && resultShow.name_search">
         <table class="table" export-csv="csv" ng-table="tableParams">
           <tr ng-repeat="record in $data">
-            <td data-title="'Name'" ng-click="getTitlesByNameAndTable(record._id, record.table)" ng-show="resultShow.name_search" sortable="'name'">
+            <td data-title="'Name'" ng-click="getTitlesByNameAndTable(record._id, record.table)" ng-show="resultShow.name_search" sortable="'_id'">
               <a>{{record._id}}</a>
             </td>
             <td data-title="'Type'" ng-show="resultShow.name_search" sortable="'table'">{{record.table}}</td>
