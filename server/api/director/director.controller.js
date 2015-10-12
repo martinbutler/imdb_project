@@ -33,8 +33,6 @@ exports.directorTitles = function(req, res) {
   });
 };
 
-
-
 // Get list of directors
 exports.index = function(req, res) {
   Director.find(function (err, directors) {
