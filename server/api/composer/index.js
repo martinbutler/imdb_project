@@ -6,6 +6,7 @@ var controller = require('./composer.controller');
 var router = express.Router();
 
 router.get('/distinctComposers/:name', controller.distinctComposers);
+router.get('/composersTitles/:name', controller.composerTitles);
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
