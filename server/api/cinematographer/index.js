@@ -7,6 +7,7 @@ var router = express.Router();
 
 router.get('/distinctCinematographers/:name', controller.distinctCinematographers);
 router.get('/cinematographersTitles/:name', controller.cinematographerTitles);
+router.get('/byTitle/:title', controller.cinematographersByTitles);
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
