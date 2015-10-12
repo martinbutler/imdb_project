@@ -61,12 +61,10 @@ angular.module('imdbProjectApp')
       var getUrl;
       $scope.collection_tables.forEach(function(table) {
         if(table.title === collection) {
-          console.log(table.collection.split("/"))
           getUrl = 'api/' + table.collection.split('/')[1] +  "/" + table.collection.split('/')[1] + "Titles/" + name
         }
       })
       $http.get(getUrl).success(function(a) {
-        console.log(a)
         searchResultCombine(a, collection.title);
       });
       $scope.resultShow.titles_for_name = true;
@@ -82,6 +80,10 @@ angular.module('imdbProjectApp')
          obj['table'] = t;
          if(obj['title']) {
            obj['title'] = obj['title'].replace(/\\"/g, "");
+         }
+         if(obj['role']) {
+           obj['role'] = obj['role'].replace(/\[/g, "");
+           obj['role'] = obj['role'].replace(/\]/g, "");
          }
          return obj;
       }));

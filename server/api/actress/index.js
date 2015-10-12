@@ -6,6 +6,7 @@ var controller = require('./actress.controller');
 var router = express.Router();
 
 router.get('/distinctActresses/:name', controller.distinctActresses);
+router.get('/actressesTitles/:name', controller.actressTitles);
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.post('/', controller.create);

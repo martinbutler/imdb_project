@@ -70,6 +70,19 @@ exports.distinctActresses = function(req, res) {
   });
 };
 
+// Get title and roles of an actress
+exports.actressTitles = function(req, res) {
+  var start = Date.now();
+  Actress.find({
+    name: req.params.name
+  }, function(err, actressRecords) {
+    var end =  Date.now();
+    console.log('time', end-start)
+    if(err) { return handleError(res, err); }
+    return res.json(200, actressRecords);
+  });
+};
+
 function handleError(res, err) {
   return res.send(500, err);
 }
