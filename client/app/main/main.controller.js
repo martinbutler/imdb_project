@@ -55,11 +55,23 @@ angular.module('imdbProjectApp')
     // search by Name on any selecte collections
     $scope.searchByName = function(){
       clearResults();
-      $scope.resultShow.name_search = true;
       searchResultsCombined = [];
       $scope.to_search.collections.forEach(function(collection) {
         $http.get('api' + collection.collection + $scope.nameSearch).success(function(a) {
           searchResultCombine(a, collection.title);
+          $scope.resultShow.name_search = true;
+        });
+      });
+    }
+
+    // getTitleDetails
+    $scope.getTitleDetails = function(title){
+      clearResults();
+      searchResultsCombined = [];
+      $scope.collection_tables.forEach(function(collection) {
+        $http.get('api/' + collection.collection.split('/')[1] + "/byTitle/" +title).success(function(a) {
+          searchResultCombine(a, collection.title);
+          $scope.resultShow.title_details = true;
         });
       });
 
@@ -68,10 +80,10 @@ angular.module('imdbProjectApp')
     // search by movie title
     $scope.searchForMovie = function(){
       clearResults();
-      $scope.resultShow.titles_search = true;
       searchResultsCombined = [];
       $http.get('api/movies/distinctMovies/' + $scope.titleSearch).success(function(a) {
         searchResultCombine(a, "");
+        $scope.resultShow.titles_search = true;
       });
     }
 
@@ -88,22 +100,24 @@ angular.module('imdbProjectApp')
       })
       $http.get(getUrl).success(function(a) {
         searchResultCombine(a, collection.title);
+        $scope.resultShow.titles_for_name = true;
       });
-      $scope.resultShow.titles_for_name = true;
     }
 
     // function to combine results when calling on multiple collections
     var searchResultCombine = function(a, t) {
       searchResultsCombined = searchResultsCombined.concat(a.map(function(obj){
-         obj['table'] = t;
-         if(obj['title']) {
-           obj['title'] = obj['title'].replace(/\\"/g, "");
-         }
-         if(obj['role']) {
-           obj['role'] = obj['role'].replace(/\[/g, "");
-           obj['role'] = obj['role'].replace(/\]/g, "");
-         }
-         return obj;
+        if(t) {
+          obj['table'] = t;
+        }
+        if(obj['title']) {
+          obj['title'] = obj['title'].replace(/\\"/g, "");
+        }
+        if(obj['role']) {
+          obj['role'] = obj['role'].replace(/\[/g, "");
+          obj['role'] = obj['role'].replace(/\]/g, "");
+        }
+        return obj;
       }));
       data = searchResultsCombined;
         $scope.tableParams.reload();
