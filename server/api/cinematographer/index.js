@@ -6,6 +6,7 @@ var controller = require('./cinematographer.controller');
 var router = express.Router();
 
 router.get('/distinctCinematographers/:name', controller.distinctCinematographers);
+router.get('/cinematographersTitles/:name', controller.cinematographerTitles);
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.post('/', controller.create);

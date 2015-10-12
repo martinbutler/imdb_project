@@ -3,6 +3,7 @@
 angular.module('imdbProjectApp')
   .controller('MainCtrl', function ($scope, $http, socket, ngTableParams, $filter) {
     var searchResultsCombined = [];
+    $scope.searchedName;
     $scope.collection_tables = [
       {
         title: "Actors",
@@ -59,6 +60,7 @@ angular.module('imdbProjectApp')
       searchResultsCombined = [];
       clearResults();
       var getUrl;
+      $scope.searchedName = name;
       $scope.collection_tables.forEach(function(table) {
         if(table.title === collection) {
           getUrl = 'api/' + table.collection.split('/')[1] +  "/" + table.collection.split('/')[1] + "Titles/" + name

@@ -12,48 +12,65 @@
   <div class="col-md-6">
     <label>Search by Name</label>
     <div class="input-group">
-      <input type="text" class="form-control" placeholder="Enter full or partial name here." ng-model="nameSearch">
+      <input class="form-control" ng-model="nameSearch" placeholder="Enter full or partial name here." type="text">
       <span class="input-group-btn">
-        <button type="submit" class="btn btn-primary" ng-click="searchByName()">Search</button>
+        <button class="btn btn-primary" ng-click="searchByName()" type="submit">Search</button>
       </span>
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-</div><!-- /.row -->
+    </div>
+    <!-- /input-group -->
+  </div>
+  <!-- /.col-lg-6 -->
+</div>
+<!-- /.row -->
 
 <div class="row col-md-11">
   <div class="col-md-6 jumbotron">
     <label>Select collections you wish the search:</label>
     <div class="input-group">
       <label class="col-md-6" ng-repeat="col in collection_tables">&nbsp;
-        <input type="checkbox" checklist-model="to_search.collections" checklist-value="col"> {{col.title}}
+        <input checklist-model="to_search.collections" checklist-value="col" type="checkbox">
+        {{col.title}}
       </label>
-    </div><!-- /input-group -->
+    </div>
+    <!-- /input-group -->
     <button class='col-md-6 pull-right btn btn-default' ng-click="uncheckAll()">uncheck all</button>
     <button class='col-md-6 pull-right btn btn-default' ng-click="checkAll()">check all</button>
-  </div><!-- /.col-lg-6 -->
-</div><!-- /.row -->
-
-<div class="col-md-12" ng-show="tableParams.data.length > 0 && resultShow.name_search" ng-class="userStyle.css_class">
-  <table ng-table="tableParams" class="table" export-csv="csv">
+  </div>
+  <!-- /.col-lg-6 -->
+</div>
+<!-- /.row -->
+<div class="col-md-12">
+  <div class="row">
+<div class="col-md-12" ng-class="userStyle.css_class" ng-show="tableParams.data.length > 0 && resultShow.name_search">
+  <table class="table" export-csv="csv" ng-table="tableParams">
     <tr ng-repeat="record in $data">
-        <td ng-show="resultShow.name_search"  data-title="'Name'" ng-click="getTitlesByNameAndTable(record._id, record.table)" sortable="'_id'"><a>{{record._id}}</a></td>
-        <td ng-show="resultShow.name_search"  data-title="'Type'" sortable="'table'">{{record.table}}</td>
-        <td ng-show="resultShow.name_search"  data-title="'Number of Credits'" sortable="'titleSum'">{{record.titleSum}}</td>
-        <!-- <td ng-if="true" data-title="'txEnd'" sortable="'txEnd'">{{record.txEnd}}</td> -->
-
+      <td data-title="'Name'" ng-click="getTitlesByNameAndTable(record._id, record.table)" ng-show="resultShow.name_search" sortable="'_id'">
+        <a>{{record._id}}</a>
+      </td>
+      <td data-title="'Type'" ng-show="resultShow.name_search" sortable="'table'">{{record.table}}</td>
+      <td data-title="'Number of Credits'" ng-show="resultShow.name_search" sortable="'titleSum'">{{record.titleSum}}</td>
+      <!-- <td ng-if="true" data-title="'txEnd'" sortable="'txEnd'">{{record.txEnd}}</td> -->
     </tr>
   </table>
 </div>
-
-<div class="col-md-12" ng-show="tableParams.data.length > 0 && resultShow.titles_for_name" ng-class="userStyle.css_class">
-  <table ng-table="tableParams" class="table" export-csv="csv">
-    <tr ng-repeat="record in $data">
-        <td ng-show="resultShow.titles_for_name" data-title="'Title'" ng-click="getTitleDetails(record.title)" sortable="'_id'"><a>{{record.title}}</a></td>
-        <td ng-show="resultShow.titles_for_name"  data-title="'Role'" sortable="'table'">{{record.role}}</td>
-    </tr>
-  </table>
+</div>
 </div>
 
+<div class="col-md-12">
+  <div class="row">
+    <h3>{{searchedName}}</h3>
+    <div class="col-md-12" ng-class="userStyle.css_class" ng-show="tableParams.data.length > 0 && resultShow.titles_for_name">
+      <table class="table" export-csv="csv" ng-table="tableParams">
+        <tr ng-repeat="record in $data">
+          <td data-title="'Title'" ng-click="getTitleDetails(record.title)" ng-show="resultShow.titles_for_name" sortable="'_id'">
+            <a>{{record.title}}</a>
+          </td>
+          <td data-title="'Role'" ng-show="resultShow.titles_for_name" sortable="'table'">{{record.role}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
 <!-- <footer class="footer">
   <div class="container">
       <p>Angular Fullstack v2.0.13 |
