@@ -2,8 +2,11 @@
 
 angular.module('imdbProjectApp')
   .controller('MainCtrl', function ($scope, $http, socket, ngTableParams, $filter) {
+    // collects resutls from queries
     var searchResultsCombined = [];
+    // identifies which result tables to show
     $scope.searchedName;
+    // all collection containing names of people
     $scope.collection_tables = [
       {
         title: "Actors",
@@ -30,10 +33,15 @@ angular.module('imdbProjectApp')
         collection: '/directors/distinctDirectors/'
       },
       {
+        title: "Movie/TV Titles",
+        collection: '/movies/distinctMovies/'
+      },
+      {
         title: "Producers",
         collection: '/producers/distinctProducers/'
       }
     ];
+    // multi select variables and functions
     $scope.to_search = {
       collections: []
     }
@@ -44,6 +52,7 @@ angular.module('imdbProjectApp')
       $scope.to_search.collections = [];
     };
 
+    // search by Name on any selecte collections
     $scope.searchByName = function(){
       clearResults();
       $scope.resultShow.name_search = true;
@@ -56,6 +65,17 @@ angular.module('imdbProjectApp')
 
     }
 
+    // search by movie title
+    $scope.searchForMovie = function(){
+      clearResults();
+      $scope.resultShow.titles_search = true;
+      searchResultsCombined = [];
+      $http.get('api/movies/distinctMovies/' + $scope.titleSearch).success(function(a) {
+        searchResultCombine(a, "");
+      });
+    }
+
+    // titles based on individual
     $scope.getTitlesByNameAndTable = function(name, collection) {
       searchResultsCombined = [];
       clearResults();
@@ -72,12 +92,8 @@ angular.module('imdbProjectApp')
       $scope.resultShow.titles_for_name = true;
     }
 
-    var data = [];  // init search results array
+    // function to combine results when calling on multiple collections
     var searchResultCombine = function(a, t) {
-      // var reformattedArray = a.map(function(obj){
-      //    obj['table'] = t;
-      //    return obj;
-      // });
       searchResultsCombined = searchResultsCombined.concat(a.map(function(obj){
          obj['table'] = t;
          if(obj['title']) {
@@ -94,7 +110,13 @@ angular.module('imdbProjectApp')
         $scope.tableParams.total(data.length);
     };
 
-     // table object, includes sorting and pagination
+    // clear-results-object
+    var clearResults = function() {
+      $scope.resultShow = {};
+    }
+
+    // table object, includes sorting and pagination
+    var data = [];  // init search results array
     $scope.tableParams = new ngTableParams({
       page: 1,            // show first page
       count: 10,          // count per page
@@ -119,13 +141,7 @@ angular.module('imdbProjectApp')
           $scope.set.y.push(pageData[i].txEnd - pageData[i].txStart);
         }
       }
-
     });
-
-    // clear-results-object
-    var clearResults = function() {
-      $scope.resultShow = {};
-    }
 
     // user selectable css style options
     $scope.userStyles = [{

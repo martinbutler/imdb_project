@@ -3,6 +3,34 @@
 var _ = require('lodash');
 var Movie = require('./movie.model');
 
+
+// Get distinct of values from name field
+exports.distinctMovies = function(req, res) {
+  var start = Date.now();
+  Movie.find({
+    title: new RegExp(req.params.name, 'i')
+  }, function(err, movieRecords) {
+    var end =  Date.now();
+    console.log('time', end-start)
+    if(err) { return handleError(res, err); }
+    return res.json(200, movieRecords);
+  });
+};
+
+// Get titles of movies
+exports.movieTitles = function(req, res) {
+  var start = Date.now();
+  Movie.find({
+    name: req.params.name
+  }, function(err, movieRecords) {
+    var end =  Date.now();
+    console.log('time', end-start)
+    if(err) { return handleError(res, err); }
+    return res.json(200, movieRecords);
+  });
+};
+
+
 // Get list of movies
 exports.index = function(req, res) {
   Movie.find(function (err, movies) {
