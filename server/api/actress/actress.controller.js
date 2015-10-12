@@ -83,6 +83,19 @@ exports.actressTitles = function(req, res) {
   });
 };
 
+// actorsByTitles
+exports.actressesByTitles = function(req, res) {
+  var start = Date.now();
+  Actress.find({
+    title: req.params.title
+  }, function(err, actressRecords) {
+    var end =  Date.now();
+    console.log('time', end-start)
+    if(err) { return handleError(res, err); }
+    return res.json(200, actressRecords);
+  });
+};
+
 function handleError(res, err) {
   return res.send(500, err);
 }
