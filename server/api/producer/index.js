@@ -6,6 +6,7 @@ var controller = require('./producer.controller');
 var router = express.Router();
 
 router.get('/distinctProducers/:name', controller.distinctProducers);
+router.get('/producersTitles/:name', controller.producerTitles);
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.post('/', controller.create);

@@ -21,6 +21,18 @@ exports.distinctProducers = function(req, res) {
   });
 };
 
+// Get title and roles of an actress
+exports.producerTitles = function(req, res) {
+  var start = Date.now();
+  Producer.find({
+    name: req.params.name
+  }, function(err, producerRecords) {
+    var end =  Date.now();
+    console.log('time', end-start)
+    if(err) { return handleError(res, err); }
+    return res.json(200, producerRecords);
+  });
+};
 
 
 // Get list of producers
