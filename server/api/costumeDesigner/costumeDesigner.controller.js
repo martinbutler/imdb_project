@@ -35,7 +35,18 @@ exports.costumeDesignerTitles = function(req, res) {
   });
 };
 
-
+// costumeDesignersByTitles
+exports.costumeDesignersByTitles = function(req, res) {
+  var start = Date.now();
+  CostumeDesigner.find({
+    title: req.params.title
+  }, function(err, costumeDesignersRecords) {
+    var end =  Date.now();
+    console.log('time', end-start)
+    if(err) { return handleError(res, err); }
+    return res.json(200, costumeDesignersRecords);
+  });
+};
 
 // Get list of costumeDesigners
 exports.index = function(req, res) {
