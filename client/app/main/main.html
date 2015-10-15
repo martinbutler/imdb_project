@@ -20,7 +20,7 @@
     <div class="jumbotron">
       <label>Select collections you wish the search:</label>
       <div class="input-group">
-        <label class="col-md-6" ng-repeat="col in collection_tables">&nbsp;
+        <label class="col-md-6" ng-repeat="col in collection_tables" ng-if="col.title != 'Movie/TV Titles'">&nbsp;
           <input checklist-model="to_search.collections" checklist-value="col" type="checkbox">
           {{col.title}}
         </label>
