@@ -21,7 +21,7 @@ exports.distinctComposers = function(req, res) {
   });
 };
 
-// Get title and roles of an actress
+// Get  composers
 exports.composerTitles = function(req, res) {
   var start = Date.now();
   Composer.find({
@@ -33,6 +33,20 @@ exports.composerTitles = function(req, res) {
     return res.json(200, composerRecords);
   });
 };
+
+// composersByTitles
+exports.composersByTitles = function(req, res) {
+  var start = Date.now();
+  Composer.find({
+    title: req.params.title
+  }, function(err, composerRecords) {
+    var end =  Date.now();
+    console.log('time', end-start)
+    if(err) { return handleError(res, err); }
+    return res.json(200, composerRecords);
+  });
+};
+
 
 // Get list of composers
 exports.index = function(req, res) {
