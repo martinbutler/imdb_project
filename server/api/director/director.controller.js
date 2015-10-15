@@ -33,6 +33,20 @@ exports.directorTitles = function(req, res) {
   });
 };
 
+// directorByTitles
+exports.directorByTitles = function(req, res) {
+  var start = Date.now();
+  Director.find({
+    title: req.params.title
+  }, function(err, directorsTitlesRecords) {
+    var end =  Date.now();
+    console.log('time', end-start)
+    if(err) { return handleError(res, err); }
+    return res.json(200, directorsTitlesRecords);
+  });
+};
+
+
 // Get list of directors
 exports.index = function(req, res) {
   Director.find(function (err, directors) {

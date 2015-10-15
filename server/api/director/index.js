@@ -7,6 +7,7 @@ var router = express.Router();
 
 router.get('/distinctDirectors/:name', controller.distinctDirectors);
 router.get('/directorsTitles/:name', controller.directorTitles);
+router.get('/byTitle/:title', controller.directorByTitles);
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.post('/', controller.create);

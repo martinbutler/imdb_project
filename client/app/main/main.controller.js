@@ -69,10 +69,12 @@ angular.module('imdbProjectApp')
       clearResults();
       searchResultsCombined = [];
       $scope.collection_tables.forEach(function(collection) {
-        $http.get('api/' + collection.collection.split('/')[1] + "/byTitle/" +title).success(function(a) {
-          searchResultCombine(a, collection.title);
-          $scope.resultShow.title_details = true;
-        });
+        if (collection.collection.split('/')[1] !== "movies") {
+          $http.get('api/' + collection.collection.split('/')[1] + "/byTitle/" +title).success(function(a) {
+            searchResultCombine(a, collection.title);
+            $scope.resultShow.title_details = true;
+          });
+        }
       });
 
     }
