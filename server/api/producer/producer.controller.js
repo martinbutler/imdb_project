@@ -34,6 +34,19 @@ exports.producerTitles = function(req, res) {
   });
 };
 
+// actorsByTitles
+exports.producerByTitles = function(req, res) {
+  var start = Date.now();
+  Producer.find({
+    title: req.params.title
+  }, function(err, producerRecords) {
+    var end =  Date.now();
+    console.log('time', end-start)
+    if(err) { return handleError(res, err); }
+    return res.json(200, producerRecords);
+  });
+};
+
 
 // Get list of producers
 exports.index = function(req, res) {
