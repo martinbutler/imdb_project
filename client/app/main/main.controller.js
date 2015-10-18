@@ -39,6 +39,10 @@ angular.module('imdbProjectApp')
       {
         title: "Producers",
         collection: '/producers/distinctProducers/'
+      },
+      {
+        title: "Writers",
+        collection: '/writers/distinctWriters/'
       }
     ];
     // multi select variables and functions
