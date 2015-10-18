@@ -96,6 +96,22 @@ exports.actressesByTitles = function(req, res) {
   });
 };
 
+// Get list of actress and titles matching on partial title and partial title
+exports.combinedNameAndTitleSearch = function(req, res) {
+  var r1 = new RegExp(req.params.title, 'i');
+  var r2 = new RegExp(req.params.name, 'i');
+  var start = Date.now();
+  Actress.find({
+      title: {$regex:r1},
+      name: {$regex:r2}
+  }, function (err, actressAndTitles) {
+    var end =  Date.now();
+    console.log('time', end - start);
+    if(err) { return handleError(res, err); }
+    return res.json(200, actressAndTitles);
+  });
+};
+
 function handleError(res, err) {
   return res.send(500, err);
 }
