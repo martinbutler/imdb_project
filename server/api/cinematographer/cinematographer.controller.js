@@ -47,6 +47,23 @@ exports.cinematographersByTitles = function(req, res) {
   });
 };
 
+// Get list of cinematographers and titles matching on partial title and partial title
+exports.combinedNameAndTitleSearch = function(req, res) {
+  var r1 = new RegExp(req.params.title, 'i');
+  var r2 = new RegExp(req.params.name, 'i');
+  var start = Date.now();
+  Cinematographer.find({
+      title: {$regex:r1},
+      name: {$regex:r2}
+  }, function (err, cinematographersAndTitles) {
+    var end =  Date.now();
+    console.log('time', end - start);
+    if(err) { return handleError(res, err); }
+    return res.json(200, cinematographersAndTitles);
+  });
+};
+
+
 // Get list of cinematographers
 exports.index = function(req, res) {
   Cinematographer.find(function (err, cinematographers) {
