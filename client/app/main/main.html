@@ -120,10 +120,10 @@
               <a>{{record.name}}</a>
             </td>
             <td data-title="'Type'" ng-show="resultShow.adv_search" sortable="'table'">{{record.table}}</td>
+            <td data-title="'Role'" sortable="'table'">{{record.role}}</td>
             <td data-title="'Title'" ng-click="getTitleDetails(record.title)" ng-show="resultShow.adv_search" sortable="'_id'">
               <a>{{record.title}}</a>
             </td>
-            <!-- <td ng-if="true" data-title="'txEnd'" sortable="'txEnd'">{{record.txEnd}}</td> -->
           </tr>
         </table>
       </div>

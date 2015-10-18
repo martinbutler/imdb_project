@@ -113,11 +113,9 @@ angular.module('imdbProjectApp')
       clearResults();
       searchResultsCombined = [];
       $scope.to_search.collections.forEach(function(collection) {
-        console.log('api/' + collection.collection.split('/')[1] + "/byActorAndTitle/" + $scope.titleSearch + "/" + $scope.nameSearch)
-        $http.get('api/' + collection.collection.split('/')[1] + "/byActorAndTitle/" + $scope.titleSearch + "/" + $scope.nameSearch).success(function(a) {
+        $http.get('api/' + collection.collection.split('/')[1] + "/byNameAndTitle/" + $scope.titleSearch + "/" + $scope.nameSearch).success(function(a) {
           searchResultCombine(a, collection.title);
           $scope.resultShow.adv_search = true;
-          console.log('adv', a)
         });
       });
     }

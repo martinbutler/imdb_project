@@ -100,7 +100,7 @@ exports.actorsByTitles = function(req, res) {
 };
 
 // Get list of actors and titles matching on partial title and partial title
-exports.combinedActorAndTitleSearch = function(req, res) {
+exports.combinedNameAndTitleSearch = function(req, res) {
   var r1 = new RegExp(req.params.title, 'i');
   var r2 = new RegExp(req.params.name, 'i');
   var start = Date.now();

@@ -9,7 +9,7 @@ router.get('/distinctActors/:name', controller.distinctActors);
 router.get('/sixdegrees/:other/:bacon', controller.sixdegrees);
 router.get('/actorsTitles/:name', controller.actorTitles);
 router.get('/byTitle/:title', controller.actorsByTitles);
-router.get('/byActorAndTitle/:title/:name', controller.combinedActorAndTitleSearch);
+router.get('/byNameAndTitle/:title/:name', controller.combinedNameAndTitleSearch);
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
