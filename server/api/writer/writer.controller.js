@@ -45,6 +45,23 @@ exports.writersByTitles = function(req, res) {
   });
 };
 
+// Get list of writers and titles matching on partial name and partial title
+exports.combinedNameAndTitleSearch = function(req, res) {
+  var r1 = new RegExp(req.params.title, 'i');
+  var r2 = new RegExp(req.params.name, 'i');
+  var start = Date.now();
+  Writer.find({
+      title: {$regex:r1},
+      name: {$regex:r2}
+  }, function (err, writersAndTitles) {
+    var end =  Date.now();
+    console.log('time', end - start);
+    if(err) { return handleError(res, err); }
+    return res.json(200, writersAndTitles);
+  });
+};
+
+
 
 // Get list of writers
 exports.index = function(req, res) {

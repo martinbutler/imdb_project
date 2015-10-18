@@ -99,7 +99,7 @@ exports.actorsByTitles = function(req, res) {
   });
 };
 
-// Get list of actors and titles matching on partial title and partial title
+// Get list of actors and titles matching on partial name and partial title
 exports.combinedNameAndTitleSearch = function(req, res) {
   var r1 = new RegExp(req.params.title, 'i');
   var r2 = new RegExp(req.params.name, 'i');
