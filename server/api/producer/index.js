@@ -8,6 +8,7 @@ var router = express.Router();
 router.get('/distinctProducers/:name', controller.distinctProducers);
 router.get('/producersTitles/:name', controller.producerTitles);
 router.get('/byTitle/:title', controller.producerByTitles);
+router.get('/byNameAndTitle/:title/:name', controller.combinedNameAndTitleSearch);
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
