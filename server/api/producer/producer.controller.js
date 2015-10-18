@@ -47,6 +47,23 @@ exports.producerByTitles = function(req, res) {
   });
 };
 
+// Get list of producers and titles matching on partial title and partial title
+exports.combinedNameAndTitleSearch = function(req, res) {
+  var r1 = new RegExp(req.params.title, 'i');
+  var r2 = new RegExp(req.params.name, 'i');
+  var start = Date.now();
+  Producer.find({
+      title: {$regex:r1},
+      name: {$regex:r2}
+  }, function (err, producersAndTitles) {
+    var end =  Date.now();
+    console.log('time', end - start);
+    if(err) { return handleError(res, err); }
+    return res.json(200, producersAndTitles);
+  });
+};
+
+
 
 // Get list of producers
 exports.index = function(req, res) {
