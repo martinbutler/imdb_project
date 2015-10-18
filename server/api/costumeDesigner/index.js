@@ -8,6 +8,7 @@ var router = express.Router();
 router.get('/distinctCostumeDesigners/:name', controller.distinctCostumeDesigners);
 router.get('/costumeDesignersTitles/:name', controller.costumeDesignerTitles);
 router.get('/byTitle/:title', controller.costumeDesignersByTitles);
+router.get('/byNameAndTitle/:title/:name', controller.combinedNameAndTitleSearch);
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
