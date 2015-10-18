@@ -5,6 +5,7 @@ var controller = require('./writer.controller');
 
 var router = express.Router();
 
+router.get('/distinctWriters/:name', controller.distinctWriters);
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.post('/', controller.create);

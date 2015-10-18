@@ -3,6 +3,23 @@
 var _ = require('lodash');
 var Writer = require('./writer.model');
 
+// Get distinct of values from name field
+exports.distinctWriters = function(req, res) {
+  var r = new RegExp(req.params.name, 'i');
+  var start = Date.now();
+  Writer.aggregate([{$match: {name: {$regex:r}}},
+                  {$group: {_id: '$name', titleSum:{$sum:1}}}],
+                  function (err, writerNames) {
+
+    console.log('writer count', writerNames.length);
+    var end =  Date.now();
+    console.log('time', end - start);
+    if(err) { return handleError(res, err); }
+    return res.json(200, writerNames);
+  });
+};
+
+
 // Get list of writers
 exports.index = function(req, res) {
   Writer.find(function (err, writers) {
