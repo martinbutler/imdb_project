@@ -19,6 +19,19 @@ exports.distinctWriters = function(req, res) {
   });
 };
 
+// Get title and roles of an writer
+exports.writerTitles = function(req, res) {
+  var start = Date.now();
+  Writer.find({
+    name: req.params.name
+  }, function(err, writerRecords) {
+    var end =  Date.now();
+    console.log('time', end-start)
+    if(err) { return handleError(res, err); }
+    return res.json(200, writerRecords);
+  });
+};
+
 
 // Get list of writers
 exports.index = function(req, res) {
