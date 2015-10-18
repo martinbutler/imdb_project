@@ -37,18 +37,15 @@
         <button class="btn btn-primary" ng-click="searchForMovie()" type="submit">Search</button>
       </span>
     </div>
-    <!-- <div class="jumbotron">
-      <label>Select collections you wish the search:</label>
-      <div class="input-group">
-        <label class="col-md-6" ng-repeat="col in collection_tables">&nbsp;
-          <input checklist-model="to_search.collections" checklist-value="col" type="checkbox">
-          {{col.title}}
-        </label>
-      </div>
-      <button class='col-md-6 pull-right btn btn-default' ng-click="uncheckAll()">uncheck all</button>
-      <button class='col-md-6 pull-right btn btn-default' ng-click="checkAll()">check all</button>
-    </div> -->
+    <br>
   </div>
+  <div class="col-md-6">
+    <label>Search by both Movie / TV Title And Collections </label>
+    <div class="input-group">
+        <button class="btn btn-primary" ng-click="searchAdvanced()" type="submit">Search</button>
+    </div>
+  </div>
+
 
   <div class="col-md-12">
     <div class="row">
@@ -107,6 +104,26 @@
             <td data-title="'Name'" ng-click="getTitlesByNameAndTable(record.name, record.table)" sortable="'name'"><a>{{record.name}}</a></td>
             <td data-title="'Role'" sortable="'role'">{{record.role}}</td>
             <td data-title="'Billing'" sortable="'billing'">{{record.billing}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-12" ng-class="userStyle.css_class" ng-show="tableParams.data.length > 0 && resultShow.adv_search">
+        <h3>Advance Results. Name: {{nameSearch}}, Title: {{titleSearch}}</h3>
+        <table class="table" export-csv="csv" ng-table="tableParams">
+          <tr ng-repeat="record in $data">
+            <td data-title="'Name'" ng-click="getTitlesByNameAndTable(record.name, record.table)" ng-show="resultShow.adv_search" sortable="'_id'">
+              <a>{{record.name}}</a>
+            </td>
+            <td data-title="'Type'" ng-show="resultShow.adv_search" sortable="'table'">{{record.table}}</td>
+            <td data-title="'Title'" ng-click="getTitleDetails(record.title)" ng-show="resultShow.adv_search" sortable="'_id'">
+              <a>{{record.title}}</a>
+            </td>
+            <!-- <td ng-if="true" data-title="'txEnd'" sortable="'txEnd'">{{record.txEnd}}</td> -->
           </tr>
         </table>
       </div>

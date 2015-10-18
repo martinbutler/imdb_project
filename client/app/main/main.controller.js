@@ -66,6 +66,7 @@ angular.module('imdbProjectApp')
 
     // getTitleDetails
     $scope.getTitleDetails = function(title){
+      $scope.searchedName = title;
       clearResults();
       searchResultsCombined = [];
       $scope.collection_tables.forEach(function(collection) {
@@ -81,6 +82,7 @@ angular.module('imdbProjectApp')
 
     // search by movie title
     $scope.searchForMovie = function(){
+      $scope.searchedName = '';
       clearResults();
       searchResultsCombined = [];
       $http.get('api/movies/distinctMovies/' + $scope.titleSearch).success(function(a) {
@@ -103,6 +105,20 @@ angular.module('imdbProjectApp')
       $http.get(getUrl).success(function(a) {
         searchResultCombine(a, collection.title);
         $scope.resultShow.titles_for_name = true;
+      });
+    }
+
+    $scope.searchAdvanced = function(name, collection) {
+      $scope.searchedName = '';
+      clearResults();
+      searchResultsCombined = [];
+      $scope.to_search.collections.forEach(function(collection) {
+        console.log('api/' + collection.collection.split('/')[1] + "/byActorAndTitle/" + $scope.titleSearch + "/" + $scope.nameSearch)
+        $http.get('api/' + collection.collection.split('/')[1] + "/byActorAndTitle/" + $scope.titleSearch + "/" + $scope.nameSearch).success(function(a) {
+          searchResultCombine(a, collection.title);
+          $scope.resultShow.adv_search = true;
+          console.log('adv', a)
+        });
       });
     }
 

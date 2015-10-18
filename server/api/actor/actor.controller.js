@@ -99,6 +99,23 @@ exports.actorsByTitles = function(req, res) {
   });
 };
 
+// Get list of actors and titles matching on partial title and partial title
+exports.combinedActorAndTitleSearch = function(req, res) {
+  var r1 = new RegExp(req.params.title, 'i');
+  var r2 = new RegExp(req.params.name, 'i');
+  var start = Date.now();
+  Actor.find({
+      title: {$regex:r1},
+      name: {$regex:r2}
+  }, function (err, actorsAndTitles) {
+    var end =  Date.now();
+    console.log('time', end - start);
+    if(err) { return handleError(res, err); }
+    return res.json(200, actorsAndTitles);
+  });
+};
+
+
 // 6 degrees
 exports.sixdegrees = function(req, res) {
   var degree = 1, maxDegree = 6;
