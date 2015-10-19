@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var Actor = require('./actor.model');
 var async = require('async');
+var _ = require('lodash');
 
 // Get list of actors
 exports.index = function(req, res) {
@@ -83,6 +84,28 @@ exports.actorTitles = function(req, res) {
     console.log('time', end-start)
     if(err) { return handleError(res, err); }
     return res.json(200, actorRecords);
+  });
+};
+
+// Get title and roles of an actor
+exports.titlesNoSelf = function(req, res) {
+  var start = Date.now();
+  Actor.find({
+    name: req.params.name
+  }, function(err, actorRecords) {
+    var end =  Date.now();
+    console.log('time', end-start)
+    if(err) { return handleError(res, err); }
+    var actorNoSelf = _.remove(actorRecords, function(record) {
+      if (record['role'] && record['role'].indexOf('Himself') < 0 ) {
+        return record;
+      }
+    })
+    var actorTitlesOnly = [];
+    actorNoSelf.forEach(function(obj) {
+      actorTitlesOnly.push(obj.title)
+    })
+    return res.json(200, actorTitlesOnly);
   });
 };
 

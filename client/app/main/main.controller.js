@@ -56,8 +56,9 @@ angular.module('imdbProjectApp')
       $scope.to_search.collections = [];
     };
 
-    // search by Name on any selecte collections
+    // search by Name on any selected collections
     $scope.searchByName = function(){
+      $scope.searchedName = '';
       clearResults();
       searchResultsCombined = [];
       $scope.to_search.collections.forEach(function(collection) {
@@ -96,7 +97,7 @@ angular.module('imdbProjectApp')
     }
 
     // titles based on individual
-    $scope.getTitlesByNameAndTable = function(name, collection) {
+    $scope.getTitlesByNameAndTitle = function(name, collection) {
       searchResultsCombined = [];
       clearResults();
       var getUrl;
@@ -192,6 +193,26 @@ angular.module('imdbProjectApp')
       'css_class': 'searchBlues'
     }]
     $scope.userStyle = $scope.userStyles[0];  // default css style for table
+
+    // get baconMovies
+    var baconMovies = [];
+    $http.get('api/actors/titlesNoSelf/Bacon, Kevin (I)').success(function(a) {
+      baconMovies = a;
+    });
+
+    // six degree of Bacon
+    $scope.baconDegrees = function() {
+      // FIRST DEGREE CHECK:
+      console.log('data', data)
+      var actorsMovies = [];
+      data.forEach(function(record) {
+        actorsMovies.push(record.title)
+      })
+      var degreeOneIntersection = _.intersection(actorsMovies, baconMovies)
+      console.log('degreeOneIntersection', degreeOneIntersection)
+      // SECOND-SIXTH
+
+    }
 
     // test backend on page load
     // $http.get('/api/actors/actorTitles/Baychester, Robert Delanor').success(function(a) {

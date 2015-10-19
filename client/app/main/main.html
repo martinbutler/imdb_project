@@ -52,7 +52,7 @@
       <div class="col-md-12" ng-class="userStyle.css_class" ng-show="tableParams.data.length > 0 && resultShow.name_search">
         <table class="table" export-csv="csv" ng-table="tableParams">
           <tr ng-repeat="record in $data">
-            <td data-title="'Name'" ng-click="getTitlesByNameAndTable(record._id, record.table)" ng-show="resultShow.name_search" sortable="'_id'">
+            <td data-title="'Name'" ng-click="getTitlesByNameAndTitle(record._id, record.table)" ng-show="resultShow.name_search" sortable="'_id'">
               <a>{{record._id}}</a>
             </td>
             <td data-title="'Type'" ng-show="resultShow.name_search" sortable="'table'">{{record.table}}</td>
@@ -66,7 +66,7 @@
 
   <div class="col-md-12">
     <div class="row">
-      <h3>{{searchedName}}</h3>
+      <h3>{{searchedName}} <span><button ng-click="baconDegrees()" ng-show="resultShow.titles_for_name" class='btn btn-success btn-xs'>Degree of Bacon?</button></span></h3>
       <div class="col-md-12" ng-class="userStyle.css_class" ng-show="tableParams.data.length > 0 && resultShow.titles_for_name">
         <table class="table" export-csv="csv" ng-table="tableParams">
           <tr ng-repeat="record in $data">
@@ -101,7 +101,7 @@
         <table class="table" export-csv="csv" ng-table="tableParams">
           <tr ng-repeat="record in $data">
             <td data-title="'Type'" sortable="'table'">{{record.table}}</td>
-            <td data-title="'Name'" ng-click="getTitlesByNameAndTable(record.name, record.table)" sortable="'name'"><a>{{record.name}}</a></td>
+            <td data-title="'Name'" ng-click="getTitlesByNameAndTitle(record.name, record.table)" sortable="'name'"><a>{{record.name}}</a></td>
             <td data-title="'Role'" sortable="'role'">{{record.role}}</td>
             <td data-title="'Billing'" sortable="'billing'">{{record.billing}}</td>
           </tr>
@@ -116,7 +116,7 @@
         <h3>Advance Results. Name: {{nameSearch}}, Title: {{titleSearch}}</h3>
         <table class="table" export-csv="csv" ng-table="tableParams">
           <tr ng-repeat="record in $data">
-            <td data-title="'Name'" ng-click="getTitlesByNameAndTable(record.name, record.table)" ng-show="resultShow.adv_search" sortable="'_id'">
+            <td data-title="'Name'" ng-click="getTitlesByNameAndTitle(record.name, record.table)" ng-show="resultShow.adv_search" sortable="'_id'">
               <a>{{record.name}}</a>
             </td>
             <td data-title="'Type'" ng-show="resultShow.adv_search" sortable="'table'">{{record.table}}</td>
