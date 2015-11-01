@@ -4,8 +4,10 @@ angular.module('imdbProjectApp')
   .controller('MainCtrl', function ($scope, $http, socket, ngTableParams, $filter, Auth) {
     // get current user if logged in
     $scope.currentUser = Auth.getCurrentUser();
-    $scope.currentUser.history.reverse();
-    $scope.limithistory = 5;
+    if($scope.currentUser.history) {
+      $scope.currentUser.history.reverse();
+      $scope.limithistory = 5;
+    }
 
     // collects resutls from queries
     var searchResultsCombined = [];
