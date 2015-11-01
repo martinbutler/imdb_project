@@ -216,15 +216,13 @@ angular.module('imdbProjectApp')
     function logIt(details) {
       if($scope.currentUser._id) {
         $http.put('api/users/pushQuery/' + $scope.currentUser._id, {details: details}).success(function(a) {
-          // $scope.currentUser = Auth.getCurrentUser();
           $scope.currentUser.history.unshift(details)
-          // console.log($scope.currentUser)
         });
       }
     }
 
     $scope.runHistoryQuery = function(ind) {
-console.log('ding', $scope.currentUser.history[ind])
+      $scope[$scope.currentUser.history[ind].type]($scope.currentUser.history[ind].criteria, $scope.currentUser.history[ind].collections, $scope.currentUser.history[ind].criteria2)
     }
     // test backend on page load
     // $http.get('/api/actors/actorTitles/Baychester, Robert Delanor').success(function(a) {

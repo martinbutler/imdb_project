@@ -53,7 +53,8 @@
           <ul>
             <li><strong>Search Name:</strong> {{query.type}} </li>
             <li><strong>Criteria:</strong> {{query.criteria}}</li>
-            <li ng-show="query.collections"><strong>Collections:</strong> <span ng-repeat="collection in query.collections">{{collection.title}}, </span> </li>
+            <li ng-show="query.collections && query.type != 'getTitlesByNameAndTable'"><strong>Collections:</strong> <span ng-repeat="collection in query.collections">{{collection.title}}, </span> </li>
+            <li ng-show="query.collections && query.type === 'getTitlesByNameAndTable'"><strong>Collections:</strong> {{query.collections}}</li>
             <li ng-show="query.criteria2"><strong>Criteria 2 (title):</strong> {{query.criteria2}} </li>
           </ul>
         </li>
