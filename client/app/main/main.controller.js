@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('imdbProjectApp')
-  .controller('MainCtrl', function ($scope, $http, socket, ngTableParams, $filter) {
+  .controller('MainCtrl', function ($scope, $http, socket, ngTableParams, $filter, Auth) {
+    // get current user if logged in
+    $scope.currentUser = Auth.getCurrentUser();
     // collects resutls from queries
     var searchResultsCombined = [];
     // identifies which result tables to show
@@ -49,15 +51,18 @@ angular.module('imdbProjectApp')
     $scope.to_search = {
       collections: []
     }
+    // set all collections for search (check all button)
     $scope.checkAll = function() {
       $scope.to_search.collections = angular.copy($scope.collection_tables);
     };
+    // uncheck any selected collections for search (uncheck all button)
     $scope.uncheckAll = function() {
       $scope.to_search.collections = [];
     };
 
-    // search by Name on any selecte collections
-    $scope.searchByName = function(){
+    // search by Name on any select collections
+    $scope.searchByName = function(history){
+      logIt({type: 'searchByName', criteria: $scope.nameSearch, collections: $scope.to_search.collections})
       clearResults();
       searchResultsCombined = [];
       $scope.to_search.collections.forEach(function(collection) {
@@ -193,6 +198,16 @@ angular.module('imdbProjectApp')
     }]
     $scope.userStyle = $scope.userStyles[0];  // default css style for table
 
+    function logIt(details) {
+      if($scope.currentUser._id) {
+        $http.put('api/users/pushQuery/' + $scope.currentUser._id + "/" + details, {details: details}).success(function(a) {
+          console.log(a)
+        });
+        console.log('user_id', $scope.currentUser._id, 'details', details)
+      } else {
+        console.log('no user')
+      }
+    }
     // test backend on page load
     // $http.get('/api/actors/actorTitles/Baychester, Robert Delanor').success(function(a) {
     //   console.log('oneRecord', a);

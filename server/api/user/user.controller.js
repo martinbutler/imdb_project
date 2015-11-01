@@ -10,6 +10,25 @@ var validationError = function(res, err) {
 };
 
 /**
+ * Push query deatils
+ */
+exports.pushQuery = function(req,res) {
+  var userId = req.params.id;
+  var details = req.body.details;
+
+  User.findOne({ _id:userId}, function(err,user) {
+    user.history.push(details);
+    user.save(function (err) {
+      if (err) { return handleError(res, err) }
+      return res.json(200)
+    })
+
+
+  })
+};
+
+
+/**
  * Get list of users
  * restriction: 'admin'
  */
@@ -99,3 +118,7 @@ exports.me = function(req, res, next) {
 exports.authCallback = function(req, res, next) {
   res.redirect('/');
 };
+
+function handleError(res, err) {
+  return res.send(500, err);
+}
