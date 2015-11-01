@@ -61,8 +61,10 @@ angular.module('imdbProjectApp')
     };
 
     // search by Name on any select collections
-    $scope.searchByName = function(history){
-      logIt({type: 'searchByName', criteria: $scope.nameSearch, collections: $scope.to_search.collections})
+    $scope.searchByName = function(criteria, collections){
+      $scope.nameSearch = criteria || $scope.nameSearch;
+      $scope.to_search.collections = collections || $scope.to_search.collections;
+      logIt({type: 'searchByName', criteria: $scope.nameSearch, collections: $scope.to_search.collections});
       clearResults();
       searchResultsCombined = [];
       $scope.to_search.collections.forEach(function(collection) {
@@ -75,6 +77,7 @@ angular.module('imdbProjectApp')
 
     // getTitleDetails
     $scope.getTitleDetails = function(title){
+      logIt({type: 'getTitleDetails', criteria: title})
       $scope.searchedName = title;
       clearResults();
       searchResultsCombined = [];
@@ -90,7 +93,9 @@ angular.module('imdbProjectApp')
     }
 
     // search by movie title
-    $scope.searchForMovie = function(){
+    $scope.searchForMovie = function(title){
+      $scope.titleSearch = title || $scope.titleSearch;
+      logIt({type: 'searchForMovie', criteria: $scope.titleSearch});
       $scope.searchedName = '';
       clearResults();
       searchResultsCombined = [];
@@ -102,6 +107,7 @@ angular.module('imdbProjectApp')
 
     // titles based on individual
     $scope.getTitlesByNameAndTable = function(name, collection) {
+      logIt({type: 'getTitlesByNameAndTable', criteria: name, collection: collection});
       searchResultsCombined = [];
       clearResults();
       var getUrl;
@@ -117,7 +123,13 @@ angular.module('imdbProjectApp')
       });
     }
 
-    $scope.searchAdvanced = function(name, collection) {
+    $scope.searchAdvanced = function(name, collections, title) {
+
+      $scope.nameSearch = name || $scope.nameSearch;
+      $scope.to_search.collections = collections || $scope.to_search.collections;
+      $scope.titleSearch = title || $scope.titleSearch;
+
+      logIt({type: 'searchAdvanced', criteria: $scope.nameSearch, collections: $scope.to_search.collections, criteria2: $scope.titleSearch });
       $scope.searchedName = '';
       clearResults();
       searchResultsCombined = [];
@@ -200,12 +212,8 @@ angular.module('imdbProjectApp')
 
     function logIt(details) {
       if($scope.currentUser._id) {
-        $http.put('api/users/pushQuery/' + $scope.currentUser._id + "/" + details, {details: details}).success(function(a) {
-          console.log(a)
+        $http.put('api/users/pushQuery/' + $scope.currentUser._id, {details: details}).success(function(a) {
         });
-        console.log('user_id', $scope.currentUser._id, 'details', details)
-      } else {
-        console.log('no user')
       }
     }
     // test backend on page load

@@ -13,7 +13,7 @@ router.get('/me', auth.isAuthenticated(), controller.me);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
-router.put('/pushQuery/:id/:details', controller.pushQuery);
+router.put('/pushQuery/:id', controller.pushQuery);
 // router.get('/queryHistory/:id', controller.queryHistory);
 
 module.exports = router;
