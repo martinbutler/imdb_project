@@ -44,7 +44,23 @@
     <div class="input-group">
         <button class="btn btn-primary" ng-click="searchAdvanced()" type="submit">Search</button>
     </div>
+    <div ng-show="currentUser.history.length > 0">
+      <hr>
+      <label>History</label> <span ng-show="show_all_history">(<a ng-click="show_all_history = false; limithistory = 5"><small><strong>last 5</strong></small></a>)</span><span ng-hide="show_all_history">(<a ng-click="show_all_history = true; limithistory = currentUser.history.length"><small><strong>show all</strong></small></a>)</span>
+      <ul>
+        <li ng-repeat="query in currentUser.history | limitTo: limithistory">
+          <a ng-click="runHistoryQuery($index)">Query Number: {{currentUser.history.length - $index}}</a>
+          <ul>
+            <li><strong>Search Name:</strong> {{query.type}} </li>
+            <li><strong>Criteria:</strong> {{query.criteria}}</li>
+            <li ng-show="query.collections"><strong>Collections:</strong> <span ng-repeat="collection in query.collections">{{collection.title}}, </span> </li>
+            <li ng-show="query.criteria2"><strong>Criteria 2 (title):</strong> {{query.criteria2}} </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
   </div>
+
 
 
   <div class="col-md-12">
