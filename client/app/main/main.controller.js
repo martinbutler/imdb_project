@@ -59,6 +59,13 @@ angular.module('imdbProjectApp')
     // set all collections for search (check all button)
     $scope.checkAll = function() {
       $scope.to_search.collections = angular.copy($scope.collection_tables);
+      for(var i = 0; i < $scope.to_search.collections.length; i++) {
+        if($scope.to_search.collections[i].title == "Movie/TV Titles") {
+          $scope.to_search.collections.splice(i, 1);
+          break;
+          }
+      }
+
     };
     // uncheck any selected collections for search (uncheck all button)
     $scope.uncheckAll = function() {
@@ -218,7 +225,8 @@ angular.module('imdbProjectApp')
     function logIt(details) {
       if($scope.currentUser._id) {
         $http.put('api/users/pushQuery/' + $scope.currentUser._id, {details: details}).success(function(a) {
-          $scope.currentUser.history.unshift(details)
+          var temp = details;
+          $scope.currentUser.history.unshift(temp)
         });
       }
     }

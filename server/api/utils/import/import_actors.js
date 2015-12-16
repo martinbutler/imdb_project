@@ -35,7 +35,7 @@ rl.on('line', function(line) {
         atTitle = false;
       } else {
         var parseArray = line.split('\t');
-        // check if line is includes actress name
+        // check if line is includes actors name
         if (parseArray[0] !== '') {
           newRecord.name = parseArray[0];
         }
@@ -45,7 +45,7 @@ rl.on('line', function(line) {
         //   most records will have the no actor name data
         //    in the last field in the tab delimitation
         //    however there were a few records that contained
-        //    additional tab.  This will will verify and
+        //    additional tab.  This will verify and
         //    concatenate the last two fields to correct
         //    data.
         if (parMatches) {
@@ -53,6 +53,7 @@ rl.on('line', function(line) {
         } else {
           fullTitleData = line.substring(line.indexOf(parseArray[parseArray.length-2]));
           parMatches = fullTitleData.match(regExpParentheses);
+          var parMatchLen = parMatches.length;
         }
         // parse the titles marked as suspended
         if(suspendMatches = fullTitleData.match(regExpSuspended)) {

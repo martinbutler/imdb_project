@@ -47,7 +47,7 @@ rl.on('line', function(line) {
         goof += line.substring(1);
       }
     }
-  // logic to skip non mpaa rating reason data at the head of the file
+  // logic to skip non goof data at the head of the file
   } else if(line === "GOOFS LIST") {
     atTitle = true;
   } else if (atTitle && line === '=========='){
